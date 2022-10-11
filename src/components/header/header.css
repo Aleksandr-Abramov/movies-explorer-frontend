@@ -1,0 +1,129 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  background: #073042 url(../../images/png/landing-logo.png) center
+    calc(82px + 73px) no-repeat;
+}
+
+.header__nav {
+  padding: 0 70px;
+  min-height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #073042;
+  margin-bottom: 184px;
+}
+
+.header__signout {
+  padding: 8px 20px;
+  margin: 0;
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+  text-align: center;
+  border: none;
+  margin-left: 30px;
+  background: #3ddc84;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.header__signup {
+  padding: 8px 0;
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  color: #ffffff;
+  border: none;
+  background: transparent;
+  text-decoration: none;
+}
+
+.header__title {
+  max-width: 730px;
+  margin: 0 auto 224px;
+  padding: 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.header__list {
+  width: 100%;
+  padding: 24px 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  background: #272727;
+}
+.header__list-item {
+  margin-left: 40px;
+}
+.header__list-item:first-child {
+  margin-left: 0;
+}
+
+.header__link {
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 16px;
+  text-decoration-line: underline;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 768px) {
+  .header__nav {
+    margin-bottom: 326px;
+    padding: 0 30px;
+  }
+  .header__title {
+    margin-bottom: 342px;
+  }
+  .header {
+    background-position: center calc(74px + 224px);
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .header__nav {
+    margin-bottom: 207px;
+  }
+  .header__title {
+    font-size: 31px;
+    line-height: 39px;
+    margin-bottom: 246px;
+  }
+  .header__nav {
+    padding: 0 14px;
+  }
+  .header__list {
+    padding: 25px 0;
+  }
+  .header__link {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .header {
+    background-image: url(../../images/png/landing-logo-320.png);
+    background-position: center calc(74px + 142px);
+  }
+  .header__signup,
+  .header__signout {
+    font-size: 10px;
+    line-height: 16px;
+  }
+  .header__signout {
+    font-size: 10px;
+    line-height: 16px;
+    padding: 6px 12px;
+    margin-left: 14px;
+  }
+}

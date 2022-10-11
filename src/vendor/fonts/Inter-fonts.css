@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Inter-Bold';
+  src: local('Inter-Bold'), local('LexendPeta-Regular'),
+    url('./Inter-Bold.woff2') format('woff2'),
+    url('./Inter-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-Medium';
+  src: local('Inter-Medium'), local('Inter-Medium'),
+    url('./Inter-Medium.woff2') format('woff2'),
+    url('./Inter-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-Regular';
+  src: local('Inter-Regular'), local('Inter-Regular'),
+    url('./Inter-Regular.woff2') format('woff2'),
+    url('./Inter-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-SemiBold';
+  src: local('Inter-SemiBold'), local('Inter-SemiBold'),
+    url('./Inter-SemiBold.woff2') format('woff2'),
+    url('./Inter-SemiBold.woff') format('woff');
+}
+/*
+font-family: "Inter-Bold", Arial, Helvetica, sans-serif;
+font-family: "Inter-Medium", Arial, Helvetica, sans-serif;
+font-family: "Inter-Regular", Arial, Helvetica, sans-serif;
+font-family: "Inter-SemiBold", Arial, Helvetica, sans-serif;
+*/
