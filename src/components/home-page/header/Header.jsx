@@ -1,6 +1,8 @@
 import React from 'react';
 import './header.css';
+import NavTab from './navTab/NavTab';
 import menuLogo from '../../../images/svg/home-page/logo.svg';
+
 
 export default function Header() {
   return (
@@ -17,11 +19,7 @@ export default function Header() {
           </div>
         </nav>
         <h1 className='main-page-title home-page-header__main-page-title'>Учебный проект студента факультета Веб-разработки.</h1>
-      <div className="home-page-header__links">
-        <a className='home-page-header__link' href="/">О проекте</a>
-        <a className='home-page-header__link' href="/">Технологии</a>
-        <a className='home-page-header__link' href="/">Студент</a>
-      </div>
+      <NavTab />
     </header>
   );
 }

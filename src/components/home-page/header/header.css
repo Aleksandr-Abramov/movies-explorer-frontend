@@ -1,5 +1,6 @@
 .home-page-header {
-  background: #073042 url(../../../images/png/home-page/landing-logo-320.png) center calc(74px + 106px) no-repeat;
+  background: #073042 url(../../../images/png/home-page/landing-logo-320.png)
+    center calc(74px + 106px) no-repeat;
 }
 .home-page-nav {
   display: flex;
@@ -37,25 +38,6 @@
   margin: 0 auto 224px auto;
 }
 
-.home-page-header__links {
-  text-align: center;
-  padding: 24px 0 24px 0;
-  background: #272727;
-}
-
-.home-page-header__link {
-  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 16px;
-  color: #ffffff;
-  margin-right: 40px;
-}
-
-.home-page-header__link:last-child {
-  margin-right: 0;
-}
-
 @media only screen and (max-width: 768px) {
   .home-page-header {
     background-position: center calc(74px + 246px);
@@ -80,9 +62,5 @@
   }
   .home-page-header__main-page-title {
     margin: 0 auto 246px auto;
-  }
-  .home-page-header__link {
-    font-size: 11px;
-    line-height: 16px;
   }
 }
