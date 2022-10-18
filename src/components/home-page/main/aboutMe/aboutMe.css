@@ -1,22 +1,22 @@
-.profile {
+.aboutMe {
   padding: 110px 70px 125px 70px;
   background: #202020;
 }
 
-.profile__main-page-subtitle {
+.aboutMe__main-page-subtitle {
   margin: 0 0 23px 0;
 }
 
-.profile__subtitle-container {
+.aboutMe__subtitle-container {
   margin: 0 0 66px 0;
 }
 
-.profile__main-page-title {
+.aboutMe__main-page-title {
   text-align: start;
   margin-bottom: 18px;
 }
 
-.profile__subtitle {
+.aboutMe__subtitle {
   font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 18px;
@@ -25,88 +25,88 @@
   margin: 0 0 26px 0;
 }
 
-.profile__text-container {
+.aboutMe__text-container {
   max-width: 600px;
 }
-.profile__main-page-paragraph {
+.aboutMe__main-page-paragraph {
   margin: 0 0 105px 0;
 }
 
-.profile__content-container {
+.aboutMe__content-container {
   max-width: 1140px;
   display: flex;
   justify-content: space-between;
   margin: 0 0 100px 0;
 }
 
-.profile__photo {
+.aboutMe__photo {
   margin-left: 20px;
 }
 
 @media only screen and (max-width: 768px) {
-  .profile {
+  .aboutMe {
     padding: 90px 50px 90px 50px;
   }
-  .profile__main-page-title {
+  .aboutMe__main-page-title {
     margin: 0 0 40px 0;
     font-size: 40px;
     line-height: 40px;
   }
-  .profile__subtitle {
+  .aboutMe__subtitle {
     font-weight: 500;
     font-size: 12px;
     line-height: 18px;
     margin: 0 0 20px 0;
   }
-  .profile__main-page-paragraph {
+  .aboutMe__main-page-paragraph {
     max-width: 364px;
     font-size: 12px;
     line-height: 18px;
     margin: 0 0 65px 0;
   }
-  .profile__content-container {
+  .aboutMe__content-container {
     margin: 0 0 90px 0;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .profile {
+  .aboutMe {
     padding: 70px 14px 70px 14px;
   }
   .portfolio {
     max-width: 292px;
     margin: 0 auto;
   }
-  .profile__content-container {
+  .aboutMe__content-container {
     flex-direction: column;
     align-items: center;
   }
-  .profile__content-container {
+  .aboutMe__content-container {
     margin: 0 0 70px 0;
   }
 
-  .profile__main-page-title {
+  .aboutMe__main-page-title {
     margin: 0 0 20px 0;
     font-weight: 400;
     font-size: 30px;
     line-height: 36px;
   }
-  .profile__subtitle {
+  .aboutMe__subtitle {
     margin: 0 0 20px 0;
     font-weight: 500;
     font-size: 11px;
     line-height: 16px;
   }
-  .profile__main-page-paragraph {
+  .aboutMe__main-page-paragraph {
     max-width: 292px;
     margin: 0 0 40px 0;
     font-size: 11px;
     line-height: 16px;
   }
-  .profile__text-container {
+  .aboutMe__text-container {
     order: 1;
   }
-  .profile__photo {
+  .aboutMe__photo {
     margin: 0 0 40px 0;
   }
 }
