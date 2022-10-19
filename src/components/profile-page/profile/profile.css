@@ -1,0 +1,170 @@
+.authorized-header {
+  display: flex;
+  padding: 18px 70px 18px 70px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 74px;
+}
+.authorized-header__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.authorized-header__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.authorized-header__link {
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ffffff;
+  text-decoration: none;
+}
+.authorized-header__item {
+  display: inline-block;
+  margin-right: 20px;
+}
+.authorized-header__item:last-child {
+  margin-left: 30px;
+  margin-right: 0;
+}
+
+.authorized-header__link_icon:last-child:before {
+  position: absolute;
+  content: '';
+  top: -6px;
+  right: 0px;
+  width: 26px;
+  height: 30px;
+  border-radius: 5px;
+  background: #313131 url(../../../images/svg/home-page/account-icon.svg)
+    no-repeat center center;
+}
+.authorized-header__link_icon {
+  position: relative;
+  padding-right: 43px;
+  display: inline-block;
+}
+
+.authorized-header__btn-hamburger {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent url(../../../images/svg/home-page/hamburger.svg)
+    no-repeat center center;
+  display: none;
+  cursor: pointer;
+}
+
+.profile {
+  padding: 0 30px;
+}
+.profile__title {
+  padding: 0;
+  margin: 0 auto 128px auto;
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #ffffff;
+}
+.profile-form {
+  max-width: 410px;
+  margin: 0 auto 16px auto;
+}
+.profile-form__input {
+  max-width: 350px;
+  padding: 0 0 16px 0;
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #ffffff;
+  unicode-bidi: bidi-override;
+  direction: RTL;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.profile-form__label {
+  padding: 0 0 16px 0;
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #ffffff;
+}
+.profile-form__input::placeholder {
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #ffffff;
+  text-align: start;
+}
+.profile-form__label-container {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 410px;
+  border-bottom: 1px solid #424242;
+}
+.profile-form__label-container:nth-child(2) {
+  margin-bottom: 220px;
+  border-bottom: none;
+}
+.profile-form-btn {
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+.exit-account {
+  display: block;
+  margin: 0 auto;
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  border: none;
+  background: none;
+  color: #ee3465;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .profile__title {
+    margin: 0 auto 96px auto;
+  }
+  .profile-form__label-container:nth-child(2) {
+    margin-bottom: 210px;
+  }
+  .authorized-header__btn-hamburger {
+    display: block;
+  }
+  .authorized-header__links {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .profile__title {
+    margin: 0 auto 80px auto;
+  }
+  .profile-form__label-container:nth-child(2) {
+    margin-bottom: 379px;
+  }
+}

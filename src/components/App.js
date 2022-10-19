@@ -6,6 +6,7 @@ import './App.css';
 // import Main  from './main-page/main-tag/Main-home-page';
 // import Register  from './register-page/register/Register';
 import Login  from './login-page/login/Login';
+import Profile from './profile-page/profile/Profile';
 // import AboutTheProject  from '../components/main-page/aboutTheProject/AboutTheProject';
 // import Technologies  from '../components/main-page/technologies/Technologies';
 // import Profile  from '../components/main-page/profile/Profile';
@@ -18,7 +19,8 @@ function App() {
     <Main />
     <Footer /> */}
     {/* <Register /> */}
-    <Login />
+    {/* <Login /> */}
+    <Profile />
   </>
  );
    
