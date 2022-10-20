@@ -7,11 +7,11 @@ import './App.css';
 // import Register  from './register-page/register/Register';
 // import Login  from './login-page/login/Login';
 // import Profile from './profile-page/profile/Profile';
-import NotFound404 from './page-404/page-404/NotFound404';
+// import NotFound404 from './page-404/page-404/NotFound404';
 // import AboutTheProject  from '../components/main-page/aboutTheProject/AboutTheProject';
 // import Technologies  from '../components/main-page/technologies/Technologies';
 // import Profile  from '../components/main-page/profile/Profile';
-
+import Movies from './movies-page/Movies';
 
 function App() {
  return (
@@ -22,7 +22,8 @@ function App() {
     {/* <Register /> */}
     {/* <Login /> */}
     {/* <Profile /> */}
-    <NotFound404 />
+    {/* <NotFound404 /> */}
+    <Movies />
   </>
  );
    

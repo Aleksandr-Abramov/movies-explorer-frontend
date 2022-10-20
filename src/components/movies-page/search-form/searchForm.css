@@ -1,0 +1,82 @@
+.search-form__btn {
+  margin-right: 30px;
+  width: 80px;
+  height: 34px;
+  background: #4285f4 url(../../../images/svg/home-page/search-icon2.svg)
+    no-repeat center center;
+  border-radius: 48px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form__input {
+  width: 100%;
+  padding: 0 0 0 34px;
+  outline: none;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  background: #2f2f2f url(../../../images/svg/home-page/searc-icon1.svg)
+    no-repeat left center;
+  color: #8b8b8b;
+  border: none;
+}
+.search-form__imput-container {
+  display: flex;
+  flex-basis: 868px;
+}
+
+.search-form {
+  
+  padding: 19px 30px 19px 19px;
+  margin: 0 auto;
+  display: flex;
+  background: #2f2f2f;
+  border-radius: 9px;
+}
+.movies__search-form {
+  margin: 70px 0 80px 0;
+}
+.search-form__checkbox-container:before {
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: #424242;
+  top: -2px;
+  left: 0;
+}
+
+/* cheeckbox */
+
+.search-form__checkbox {
+  display: none;
+}
+
+.search-form__checkbox-container {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  position: relative;
+}
+.search-form__label {
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #ffffff;
+}
+.switch-container {
+  width: 36px;
+  height: 20px;
+  background: #343434;
+  border-radius: 20px;
+  margin: 0 14px 0 0;
+}
+.switch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2be080;
+}
