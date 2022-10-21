@@ -1,14 +1,17 @@
 import React from 'react';
 import './movies.css';
-import Footer from '../home-page/footer/Footer'
-import AuthorizedHeader from '../shared/authorized-header/AuthorizedHeader';
+import Footer from '../shared/footer/Footer'
+import Header from '../shared/header/Header';
 import SearchForm from './search-form/SearchForm';
-
+import MainMenuAuthorized from '../shared/main-menu-authorized/MainMenuAuthorized';
 
 export default function Movies() {
   return (
     <>
-    <AuthorizedHeader/>
+    
+    <Header bg="#202020">
+      <MainMenuAuthorized/>
+    </Header>
     <main className='movies'>
     <div className="wrapper">
     <SearchForm />

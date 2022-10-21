@@ -21,6 +21,10 @@ export default function MainMenuUnauthorized() {
           </a>
         </li>
       </ul>
+      <button
+        type='button'
+        className='authorized-header__btn-hamburger'
+      ></button>
     </nav>
     
   );

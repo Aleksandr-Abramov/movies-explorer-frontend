@@ -37,3 +37,21 @@
   background: #313131 url(../../../images/svg/home-page/account-icon.svg)
     no-repeat center center;
 }
+.authorized-header__btn-hamburger {
+  display: none; 
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent url(../../../images/svg/home-page/hamburger.svg)
+    no-repeat center center;
+  display: none;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .authorized-header__btn-hamburger {
+    display: block; 
+  }
+  .main-menu-unauthorized {
+    display: none;
+  }
+} 

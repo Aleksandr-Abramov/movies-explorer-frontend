@@ -1,6 +1,13 @@
 .header {
-    padding: 18px 30px 18px 30px;
-    background: #073042;
-    border: none;
+  padding: 18px 30px 18px 30px;
+  background: #073042;
+  border: none;
 }
 
+@media only screen and (max-width: 425px) {
+  .header {
+    padding: 18px 14px 18px 14px;
+    background: #073042;
+    border: none;
+  }
+}

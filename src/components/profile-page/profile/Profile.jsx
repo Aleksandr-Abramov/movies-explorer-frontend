@@ -1,32 +1,14 @@
 import React from 'react';
 import './profile.css';
-import logo from '../../../images/svg/home-page/logo.svg';
-
+import Header from '../../shared/header/Header'
+import MainMenuAuthorized from '../../shared/main-menu-authorized/MainMenuAuthorized';
 export default function Profile() {
   return (
     <>
-      <header className='authorized-header'>
-        <img src={logo} alt='' className='authorized-header__logo' />
-        <ul className='authorized-header__links'>
-          <li className='authorized-header__item'>
-            <a href='/' className='authorized-header__link'>
-              Фильмы
-            </a>
-          </li>
-          <li className='authorized-header__item'>
-            <a href='/' className='authorized-header__link'>
-              Сохранённые фильмы
-            </a>
-          </li>
-          <li className='authorized-header__item'>
-            <a href='/' className='authorized-header__link authorized-header__link_icon'>
-              Аккаунт
-            </a>
-          </li>
-        </ul>
-        <button type='button' className='authorized-header__btn-hamburger'></button>
-      </header>
-      <main className='profile'>
+      <Header bg="#202020">
+        <MainMenuAuthorized/>
+      </Header>
+      <main className='profile page__profile'>
         <h1 className='profile__title'>Привет, Виталий!</h1>
         <form action='/' method='post' className='profile-form'>
           <div className='profile-form__label-container'>
