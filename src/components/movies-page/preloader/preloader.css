@@ -1,0 +1,25 @@
+.preloader {
+  padding: 50px 0 80px 0;
+  display: flex;
+  justify-content: center;
+}
+.preloader__btn {
+  width: 320px;
+  padding: 11px 0 11px 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  align-items: center;
+  color: #ffffff;
+  background: #2f2f2f;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 425px) {
+  .preloader__btn {
+    width: 240px;
+  }
+}
