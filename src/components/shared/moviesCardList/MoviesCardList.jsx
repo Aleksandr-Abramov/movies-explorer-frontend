@@ -1,7 +1,7 @@
 import React from 'react';
 import './moviesCardList.css';
-import MoviesCard from '../moviesCard/MoviesCard';
-import img from '../moviesCard/card-image.png'
+import MoviesCard from '../moviesCard/MoviesCard'
+import img from '../../../images/png/movie-card/movie-card.png'
     const data = [
         {src: img},
         {src: img},
@@ -9,6 +9,7 @@ import img from '../moviesCard/card-image.png'
         {src: img},
         {src: img},
     ]
+    
 export default function MoviesCardList() {
     return (
     
