@@ -1,16 +1,16 @@
 import React from 'react';
 import './header.css';
-// import MainMenuAuthorized from '../main-menu-authorized/MainMenuAuthorized';
-// import MainMenuUnauthorized from '../main-menu-unauthorized/MainMenuUnauthorized.jsx';
+import { Link } from 'react-router-dom';
 import logo from '../../../images/svg/home-page/logo.svg';
-export default function Header({children, bg}) {
+
+export default function Header({ children, bg }) {
   return (
-    <header className='header' style={{background: bg && bg}}>
+    <header className='header' style={{ background: bg && bg }}>
       <div className='wrapper wrapper-flex'>
-        <img src={logo} alt='' className='authorized-header__logo' />
+        <Link to='/'>
+          <img src={logo} alt='' className='authorized-header__logo' />
+        </Link>
         {children}
-        {/* <MainMenuAuthorized /> */}
-        {/* <MainMenuUnauthorized/> */}
       </div>
     </header>
   );

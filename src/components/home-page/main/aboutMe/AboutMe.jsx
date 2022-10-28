@@ -7,7 +7,7 @@ import profilePhoto320 from '../../../../images/png/home-page/photo-320.png';
 
 export default function Profile() {
   return (
-    <section className='aboutMe'>
+    <section className='aboutMe' id='aboutMe'>
       <div className='wrapper'>
         <div className='subtitle-container aboutMe__subtitle-container'>
           <h3 className='main-page-subtitle aboutMe__main-page-subtitle'>
@@ -27,7 +27,7 @@ export default function Profile() {
               Контур». После того, как прошёл курс по веб-разработке, начал
               заниматься фриланс-заказами и ушёл с постоянной работы.
             </p>
-            <a href='/' className='shared-link'>
+            <a href='https://github.com/Aleksandr-Abramov' className='shared-link'>
               Github
             </a>
           </div>

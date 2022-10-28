@@ -26,6 +26,12 @@
   background: #4285f4;
   border-radius: 3px;
   border: none;
+  cursor: pointer;
+}
+
+.register__form-btn:hover {
+  background: #3456f3;
+  opacity: 0.8;
 }
 
 .register__span {

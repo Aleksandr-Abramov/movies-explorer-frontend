@@ -7,17 +7,17 @@ export default function NavTab() {
     <div className="wrapper">
     <ul className='navTab-menu'>
         <li className='navTab-menu__item'>
-          <a href='/' className='navTab-menu__link'>
+          <a href='#about-progect' className='navTab-menu__link'>
             О проекте
           </a>
         </li>
         <li className='navTab-menu__item'>
-          <a href='/' className='navTab-menu__link'>
+          <a href='#technology' className='navTab-menu__link'>
             Технологии
           </a>
         </li>
         <li className='navTab-menu__item'>
-          <a href='/' className='navTab-menu__link'>
+          <a href='#aboutMe' className='navTab-menu__link'>
             Студент
           </a>
         </li>

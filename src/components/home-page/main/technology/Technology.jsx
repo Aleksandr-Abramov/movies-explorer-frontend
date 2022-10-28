@@ -3,7 +3,7 @@ import './technology.css';
 
 export default function Technology() {
   return (
-    <section className='technology'>
+    <section className='technology' id='technology'>
       <div className='wrapper'>
         <div className='subtitle-container technology__subtitle-container'>
           <h3 className='main-page-subtitle technology__main-page-subtitle'>

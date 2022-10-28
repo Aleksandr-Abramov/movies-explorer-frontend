@@ -1,24 +1,25 @@
 import React from 'react';
 import './mainMenuAuthorized.css';
+import { NavLink } from 'react-router-dom';
 
-export default function MainMenuUnauthorized() {
+export default function MainMenuAuthorized() {
   return (
-      <nav>
-      <ul className='main-menu-unauthorized'>
-        <li className='main-menu-unauthorized__item'>
-          <a href='/' className='main-menu-unauthorized__link'>
+    <nav>
+      <ul className='main-menu-authorized'>
+        <li className='main-menu-authorized__item'>
+          <NavLink to='/movies' activeClassName='main-menu-authorized__link_active' className='main-menu-authorized__link'>
             Фильмы
-          </a>
+          </NavLink>
         </li>
-        <li className='main-menu-unauthorized__item'>
-          <a href='/' className='main-menu-unauthorized__link '>
+        <li className='main-menu-authorized__item'>
+          <NavLink to='/saved-movies' activeClassName='main-menu-authorized__link_active' className='main-menu-authorized__link'>
             Сохранённые фильмы
-          </a>
+          </NavLink>
         </li>
-        <li className='main-menu-unauthorized__item'>
-          <a href='/' className='main-menu-unauthorized__link  main-menu-unauthorized__link_icon'>
+        <li className='main-menu-authorized__item'>
+          <NavLink to='/profile' activeClassName='main-menu-authorized__link_active' className='main-menu-authorized__link main-menu-authorized__link_icon'>
             Аккаунт
-          </a>
+          </NavLink>
         </li>
       </ul>
       <button
@@ -26,6 +27,5 @@ export default function MainMenuUnauthorized() {
         className='authorized-header__btn-hamburger'
       ></button>
     </nav>
-    
   );
 }

@@ -22,11 +22,14 @@
   line-height: 16px;
   color: #ffffff;
 }
+.navTab-menu__link:hover {
+  opacity: 0.7;
+}
 
 @media only screen and (max-width: 425px) {
-    .navTab-menu__item {
-        margin-right: 24px;
-      }
+  .navTab-menu__item {
+    margin-right: 24px;
+  }
   .navTab-menu__link {
     font-size: 11px;
     line-height: 16px;

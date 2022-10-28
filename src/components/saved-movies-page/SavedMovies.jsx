@@ -4,7 +4,7 @@ import Footer from '../shared/footer/Footer'
 import Header from '../shared/header/Header';
 import SearchForm from '../shared/search-form/SearchForm';
 import MainMenuAuthorized from '../shared/main-menu-authorized/MainMenuAuthorized';
-// import Preloader from '../shared/preloader/Preloader';
+// import MoreContent from '../shared/more-content/MoreContent';
 import MoviesCardList from '../shared/moviesCardList/MoviesCardList';
 
 export default function Movies() {
@@ -18,7 +18,7 @@ export default function Movies() {
       <div className="wrapper">
         <SearchForm />
         <MoviesCardList />
-        {/* <Preloader /> */}
+        {/* <MoreContent /> */}
       </div>
     </main> 
     <Footer/>

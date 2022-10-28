@@ -11,13 +11,13 @@ export default function Footer() {
           </h4>
         </div>
         <div className='home-page-footer__content-container'>
-          <span className='home-page-footer__span'>© 2020</span>
+          <span className='home-page-footer__span'>© 2022</span>
 
           <div className='home-page-footer__links'>
-            <a href='/' className='shared-link home-page-footer__shared-link'>
+            <a href='https://practicum.yandex.ru/' className='shared-link home-page-footer__shared-link'>
               Яндекс.Практикум
             </a>
-            <a href='/' className='shared-link home-page-footer__shared-link'>
+            <a href='https://github.com/Aleksandr-Abramov' className='shared-link home-page-footer__shared-link'>
               Github
             </a>
           </div>
