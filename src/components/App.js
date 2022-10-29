@@ -12,6 +12,8 @@ import Profile from './profile-page/profile/Profile';
 import Movies from './movies-page/Movies';
 import SavedMovies from './saved-movies-page/SavedMovies';
 import MainMenuUnauthorized from './shared/main-menu-unauthorized/MainMenuUnauthorized.jsx';
+// import Menu from './menu/Menu';
+// import Popup from './shared/popup/Popup';
 
 function App() {
   return (
@@ -24,9 +26,15 @@ function App() {
       </Route>
       <Route exact path='/movies'>
         <Movies />
+        {/* <Popup>
+          <Menu />
+        </Popup> */}
       </Route>
       <Route exact path='/saved-movies'>
         <SavedMovies />
+        {/* <Popup>
+          <Menu />
+        </Popup> */}
       </Route>
       <Route exact path='/profile'>
         <Profile />
