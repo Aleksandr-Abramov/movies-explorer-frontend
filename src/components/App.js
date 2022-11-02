@@ -12,10 +12,20 @@ import Profile from './profile-page/profile/Profile';
 import Movies from './movies-page/Movies';
 import SavedMovies from './saved-movies-page/SavedMovies';
 import MainMenuUnauthorized from './shared/main-menu-unauthorized/MainMenuUnauthorized.jsx';
-// import Menu from './menu/Menu';
-// import Popup from './shared/popup/Popup';
+import Menu from './menu/Menu';
+import Popup from './shared/popup/Popup';
+import { useState } from 'react';
+import { PopupContext } from './context/Context';
 
 function App() {
+  const [openClosePopup, setOpenClosePopup] = useState(false)
+  function handlerOpenPopup() {
+    setOpenClosePopup(true)
+  }
+  function handlerClosePopup() {
+    setOpenClosePopup(false);
+  }
+
   return (
     <Switch>
       <Route exact path='/signin'>
@@ -25,16 +35,20 @@ function App() {
         <Register />
       </Route>
       <Route exact path='/movies'>
+      <PopupContext.Provider  value={{handlerOpenPopup, openClosePopup, handlerClosePopup}}>
         <Movies />
-        {/* <Popup>
+        <Popup>
           <Menu />
-        </Popup> */}
+        </Popup>
+      </PopupContext.Provider>
       </Route>
       <Route exact path='/saved-movies'>
+      <PopupContext.Provider value={{handlerOpenPopup, openClosePopup, handlerClosePopup}}>
         <SavedMovies />
-        {/* <Popup>
+        <Popup>
           <Menu />
-        </Popup> */}
+        </Popup>
+        </PopupContext.Provider>
       </Route>
       <Route exact path='/profile'>
         <Profile />

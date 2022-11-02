@@ -6,8 +6,11 @@
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.3);
-
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.55s opacity, 0.55s visibility;
+}
+.popup__open {
+  opacity: 1;
   visibility: visible;
-  /* opacity: 0.3; */
-  /* transition: visibility 0.5s, opacity 0.5s linear; */
 }

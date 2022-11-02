@@ -74,6 +74,7 @@
 @media only screen and (max-width: 425px) {
   .technology {
     padding: 70px 18px 70px 18px;
+    background: #202020;
   }
   .technology__subtitle-container {
     margin: 0 0 60px 0;

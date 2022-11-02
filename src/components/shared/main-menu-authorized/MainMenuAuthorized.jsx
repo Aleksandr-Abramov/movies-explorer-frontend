@@ -1,8 +1,13 @@
 import React from 'react';
 import './mainMenuAuthorized.css';
 import { NavLink } from 'react-router-dom';
+// import { useState } from 'react';
+import { useContext } from 'react';
+import { PopupContext } from '../../context/Context';
 
 export default function MainMenuAuthorized() {
+  const { handlerOpenPopup } = useContext(PopupContext);
+  
   return (
     <nav>
       <ul className='main-menu-authorized'>
@@ -25,6 +30,7 @@ export default function MainMenuAuthorized() {
       <button
         type='button'
         className='authorized-header__btn-hamburger'
+        onClick={handlerOpenPopup}
       ></button>
     </nav>
   );

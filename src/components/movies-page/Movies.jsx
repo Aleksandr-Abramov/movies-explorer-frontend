@@ -7,12 +7,13 @@ import MainMenuAuthorized from '../shared/main-menu-authorized/MainMenuAuthorize
 import MoreContent from '../shared/more-content/MoreContent';
 import MoviesCardList from '../shared/moviesCardList/MoviesCardList';
 
+
 export default function Movies() {
+
   return (
-    <>
-    
+    <> 
     <Header bg="#202020">
-      <MainMenuAuthorized/>
+      <MainMenuAuthorized />
     </Header>
     <main className='movies'>
       <div className="wrapper">
