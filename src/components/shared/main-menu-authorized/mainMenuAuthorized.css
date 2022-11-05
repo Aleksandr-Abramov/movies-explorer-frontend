@@ -1,0 +1,65 @@
+.main-menu-authorized {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+}
+
+.main-menu-authorized__item {
+  margin-left: 20px;
+}
+.main-menu-authorized__item:last-child {
+  margin-left: 50px;
+}
+.main-menu-authorized__link {
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.main-menu-authorized__link_active {
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.main-menu-authorized__link_icon {
+  position: relative;
+  padding-right: 43px;
+  display: inline-block;
+}
+
+.main-menu-authorized__link_icon:before {
+  position: absolute;
+  content: '';
+  top: -6px;
+  right: 0px;
+  width: 26px;
+  height: 30px;
+  border-radius: 5px;
+  background: #313131 url(../../../images/svg/home-page/account-icon.svg)
+    no-repeat center center;
+}
+.authorized-header__btn-hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent url(../../../images/svg/home-page/hamburger.svg)
+    no-repeat center center;
+  display: none;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .authorized-header__btn-hamburger {
+    display: block;
+  }
+  .main-menu-authorized {
+    display: none;
+  }
+}

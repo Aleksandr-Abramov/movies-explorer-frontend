@@ -1,0 +1,112 @@
+.aboutMe {
+  padding: 110px 70px 125px 70px;
+  background: #202020;
+}
+
+.aboutMe__main-page-subtitle {
+  margin: 0 0 23px 0;
+}
+
+.aboutMe__subtitle-container {
+  margin: 0 0 66px 0;
+}
+
+.aboutMe__main-page-title {
+  text-align: start;
+  margin-bottom: 18px;
+}
+
+.aboutMe__subtitle {
+  font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #ffffff;
+  margin: 0 0 26px 0;
+}
+
+.aboutMe__text-container {
+  max-width: 600px;
+}
+.aboutMe__main-page-paragraph {
+  margin: 0 0 105px 0;
+}
+
+.aboutMe__content-container {
+  max-width: 1140px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 100px 0;
+}
+
+.aboutMe__photo {
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .aboutMe {
+    padding: 90px 50px 90px 50px;
+  }
+  .aboutMe__main-page-title {
+    margin: 0 0 40px 0;
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .aboutMe__subtitle {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0 0 20px 0;
+  }
+  .aboutMe__main-page-paragraph {
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0 0 65px 0;
+  }
+  .aboutMe__content-container {
+    margin: 0 0 90px 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .aboutMe {
+    padding: 70px 14px 70px 14px;
+  }
+  .portfolio {
+    max-width: 292px;
+    margin: 0 auto;
+  }
+  .aboutMe__content-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .aboutMe__content-container {
+    margin: 0 0 70px 0;
+  }
+
+  .aboutMe__main-page-title {
+    margin: 0 0 20px 0;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .aboutMe__subtitle {
+    margin: 0 0 20px 0;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .aboutMe__main-page-paragraph {
+    max-width: 292px;
+    margin: 0 0 40px 0;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .aboutMe__text-container {
+    order: 1;
+  }
+  .aboutMe__photo {
+    margin: 0 0 40px 0;
+  }
+}

@@ -1,0 +1,110 @@
+.about-progect {
+  padding: 110px 70px 110px 70px;
+}
+
+.about-progect__main-page-subtitle {
+  margin-bottom: 23px;
+}
+
+.about-progect__subtitle-container {
+  margin-bottom: 70px;
+}
+
+.about-progect__text-container {
+  max-width: 550px;
+  margin-right: 40px;
+}
+.about-progect__text-container:last-child {
+  margin-right: 0;
+}
+.about-progect__content-container {
+  display: flex;
+  margin-bottom: 110px;
+}
+
+.about-progect__subtitle {
+  padding: 0;
+  margin: 0 0 26px 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.progressbar {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.progressbar__item {
+  padding: 9px 0 9px 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #a0a0a0;
+}
+.progressbar__item:nth-child(2) {
+  background: #303030;
+  color: #ffffff;
+}
+.progressbar__item:nth-child(1) {
+  color: #000000;
+  background: #3ddc84;
+}
+
+@media only screen and (max-width: 768px) {
+  .about-progect {
+    padding: 90px 50px 90px 50px;
+  }
+  .about-progect__subtitle {
+    margin: 0 0 22px 0;
+  }
+  .about-progect__content-container {
+    margin-bottom: 93px;
+  }
+  .about-progect__main-page-paragraph {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-progect__text-container {
+    max-width: 319px;
+    margin-right: 30px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .about-progect {
+    padding: 70px 18px 70px 18px;
+  }
+  .about-progect__main-page-subtitle {
+    margin-bottom: 28px;
+  }
+  .about-progect__subtitle-container {
+    margin: 0 0 60px 0;
+  }
+  .about-progect__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 16px 0;
+  }
+
+  .about-progect__content-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+  }
+  .about-progect__text-container {
+    margin: 0 0 56px 0;
+  }
+  .progressbar {
+    grid-template-columns: 35% 65%;
+  }
+  .progressbar__item {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}
