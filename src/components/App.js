@@ -23,7 +23,6 @@ import apiMovies from '../utils/MoviesApi';
 function App() {
   const [openClosePopup, setOpenClosePopup] = useState(false);
   const [movieData, setMovieData] = useState([]);
-  const [newArr, setNewArr] = useState([]);
   function handlerOpenPopup() {
     setOpenClosePopup(true);
   }
@@ -31,18 +30,9 @@ function App() {
     setOpenClosePopup(false);
   }
 
-  function hendlerSearchInputChange(event, filterSearchValue) {
-    event.preventDefault();
-    console.log(filterSearchValue);
-    setNewArr(filterSearchValue);
-  }
-
-  // function hendlerMoreContent(lastSlice) {
-  //   console.log(lastSlice)
-  // }
-
   useEffect(() => {
-    apiMovies.getAllMovies().then(function (arr) {
+    apiMovies.getAllMovies()
+    .then(function (arr) {
       setMovieData(arr);
     });
   }, []);
@@ -57,7 +47,7 @@ function App() {
       </Route>
       <Route exact path='/movies'>
         <PopupContext.Provider
-          value={{ handlerOpenPopup, openClosePopup, handlerClosePopup, hendlerSearchInputChange, movieData, newArr, setNewArr }}
+          value={{ handlerOpenPopup, openClosePopup, handlerClosePopup, movieData }}
         >
           <Movies />
           <Popup>

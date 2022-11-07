@@ -8,7 +8,11 @@ import MoviesCardList from '../shared/moviesCardList/MoviesCardList';
 
 
 export default function Movies() {
+  const [newData, setNewData] = React.useState(); 
 
+  function hendlerMoviesOnSubmit(data) {
+    setNewData(data);
+  }
   return (
     <> 
     <Header bg="#202020">
@@ -16,8 +20,8 @@ export default function Movies() {
     </Header>
     <main className='movies'>
       <div className="wrapper">
-        <SearchForm />
-        <MoviesCardList />
+        <SearchForm hendlerMoviesOnSubmit={hendlerMoviesOnSubmit}/>
+        <MoviesCardList newData={newData}/>
       </div>
     </main> 
     <Footer/>
