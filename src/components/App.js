@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+// import apiMovies from '../utils/MoviesApi';
 import { Route, Switch } from 'react-router-dom';
 import Header from './shared/header/Header';
 import Main from './home-page/main/Main.jsx';
@@ -14,17 +15,37 @@ import SavedMovies from './saved-movies-page/SavedMovies';
 import MainMenuUnauthorized from './shared/main-menu-unauthorized/MainMenuUnauthorized.jsx';
 import Menu from './menu/Menu';
 import Popup from './shared/popup/Popup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PopupContext } from './context/Context';
+import apiMovies from '../utils/MoviesApi';
+// import { useEffect } from 'react';
 
 function App() {
-  const [openClosePopup, setOpenClosePopup] = useState(false)
+  const [openClosePopup, setOpenClosePopup] = useState(false);
+  const [movieData, setMovieData] = useState([]);
+  const [newArr, setNewArr] = useState([]);
   function handlerOpenPopup() {
-    setOpenClosePopup(true)
+    setOpenClosePopup(true);
   }
   function handlerClosePopup() {
     setOpenClosePopup(false);
   }
+
+  function hendlerSearchInputChange(event, filterSearchValue) {
+    event.preventDefault();
+    console.log(filterSearchValue);
+    setNewArr(filterSearchValue);
+  }
+
+  // function hendlerMoreContent(lastSlice) {
+  //   console.log(lastSlice)
+  // }
+
+  useEffect(() => {
+    apiMovies.getAllMovies().then(function (arr) {
+      setMovieData(arr);
+    });
+  }, []);
 
   return (
     <Switch>
@@ -35,19 +56,23 @@ function App() {
         <Register />
       </Route>
       <Route exact path='/movies'>
-      <PopupContext.Provider  value={{handlerOpenPopup, openClosePopup, handlerClosePopup}}>
-        <Movies />
-        <Popup>
-          <Menu />
-        </Popup>
-      </PopupContext.Provider>
+        <PopupContext.Provider
+          value={{ handlerOpenPopup, openClosePopup, handlerClosePopup, hendlerSearchInputChange, movieData, newArr, setNewArr }}
+        >
+          <Movies />
+          <Popup>
+            <Menu />
+          </Popup>
+        </PopupContext.Provider>
       </Route>
       <Route exact path='/saved-movies'>
-      <PopupContext.Provider value={{handlerOpenPopup, openClosePopup, handlerClosePopup}}>
-        <SavedMovies />
-        <Popup>
-          <Menu />
-        </Popup>
+        <PopupContext.Provider
+          value={{ handlerOpenPopup, openClosePopup, handlerClosePopup }}
+        >
+          <SavedMovies />
+          <Popup>
+            <Menu />
+          </Popup>
         </PopupContext.Provider>
       </Route>
       <Route exact path='/profile'>
