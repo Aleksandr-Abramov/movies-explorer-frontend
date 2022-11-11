@@ -31,10 +31,18 @@ function App() {
   }
 
   useEffect(() => {
-    apiMovies.getAllMovies()
-    .then(function (arr) {
-      setMovieData(arr);
-    });
+    apiMovies
+      .getAllMovies()
+      .then(function (arr) {
+        setMovieData(arr);
+      })
+      .catch((err) =>
+        console.log(
+          `Во время запроса произошла ошибка.
+           Возможно, проблема с соединением или сервер недоступен.
+           Подождите немного и попробуйте ещё раз`
+        )
+      );
   }, []);
 
   return (
@@ -47,7 +55,12 @@ function App() {
       </Route>
       <Route exact path='/movies'>
         <PopupContext.Provider
-          value={{ handlerOpenPopup, openClosePopup, handlerClosePopup, movieData }}
+          value={{
+            handlerOpenPopup,
+            openClosePopup,
+            handlerClosePopup,
+            movieData,
+          }}
         >
           <Movies />
           <Popup>
@@ -75,7 +88,6 @@ function App() {
         <Main />
         <Footer />
       </Route>
-      {/* <Preloader /> */}
     </Switch>
   );
 }

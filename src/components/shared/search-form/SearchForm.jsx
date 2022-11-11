@@ -1,49 +1,78 @@
 import React from 'react';
 import {
-   useState,
+  useState,
   //  useEffect,
-   useContext,
-   } from 'react';
+  //  useContext,
+} from 'react';
 // import apiMovies from '../../../utils/MoviesApi';
-import { PopupContext } from '../../context/Context';
 import './searchForm.css';
 
-export default function SearchForm({ hendlerMoviesOnSubmit }) {
-  const [checked, setChecked] = useState(false)
-  const { movieData } = useContext(PopupContext);
-  const [inputValue, setInputValue] = useState('');
 
-  function handlerCheckboxClick() {
-    setChecked(check => !check);
-  } 
-  const serchMovieData = movieData.filter((film) => {
-    return film.nameRU.toUpperCase().includes(inputValue.toUpperCase());
-  });
+export default function SearchForm({ handlerOnSubmit }) {
+  const [checked] = useState(
+    localStorage.getItem('checkbox') === null
+      ? false
+      : JSON.parse(localStorage.getItem('checkbox'))
+  );
 
-  function hendlerOnSubmit(event) {
-    event.preventDefault();
-    localStorage.setItem('films', JSON.stringify(serchMovieData));
-    hendlerMoviesOnSubmit(JSON.parse(localStorage.getItem('films')));
+  const [inputValue, setInputValue] = useState(
+    localStorage.getItem('request') === null
+      ? ''
+      : localStorage.getItem('request').slice(1, -1)
+  );
+  const [checkboxСlass, setСheckboxСlass] = useState(
+    checked ? 'search-form__circle_move' : ''
+  );
+ 
+  function handlerCheckboxChange(e) {
+    if (e.target.checked === true) {
+      localStorage.setItem('checkbox', JSON.stringify(e.target.checked));
+      setСheckboxСlass('search-form__circle_move');
+    } else {
+      localStorage.setItem('checkbox', JSON.stringify(e.target.checked));
+      setСheckboxСlass('');
+    }
   }
-  function handlerInputChange (event) {
-    setInputValue(event)
+ 
+  function handlerInputChange(event) {
+    event.preventDefault();
+    handlerOnSubmit(inputValue);
   }
   
+
   return (
-      <section className='search-section'>
-      <form action='/' method='GET' className='search-form' onSubmit={event => hendlerOnSubmit(event)}>
-          <input type='text' className='search-form__input' placeholder='Фильм' onChange={(event)=> handlerInputChange(event.target.value)} required/>
-          <button type='submit' className='search-form__btn'></button>
-          
-          <label htmlFor="search-form__checkbox" className='search-form__label'>
-          
-          <input type="checkbox" name="search-form__checkbox" id="search-form__checkbox" className='search-form__checkbox'/>
-          <div className='search-form__switch' onClick={handlerCheckboxClick}>
-            <div className={`search-form__circle ${checked ? 'search-form__circle_move': ''}`}></div>
+    <section className='search-section'>
+      <form
+        action='/'
+        method='GET'
+        className='search-form'
+        onSubmit={(event) => handlerInputChange(event)}
+      >
+        <input
+          type='text'
+          className='search-form__input'
+          value={inputValue || ''}
+          placeholder='Фильм'
+          onChange={(event) => setInputValue(event.target.value)}
+          required
+        />
+        <button type='submit' className='search-form__btn'></button>
+
+        <label htmlFor='search-form__checkbox' className='search-form__label'>
+          <input
+            type='checkbox'
+            name='search-form__checkbox'
+            id='search-form__checkbox'
+            onChange={handlerCheckboxChange}
+            className='search-form__checkbox'
+            defaultChecked={checked}
+          />
+          <div className='search-form__switch'>
+            <div className={`search-form__circle ${checkboxСlass}`}></div>
           </div>
           Короткометражки
-          </label>
-        </form>
-      </section>
+        </label>
+      </form>
+    </section>
   );
 }
