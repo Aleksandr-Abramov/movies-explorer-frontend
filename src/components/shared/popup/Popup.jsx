@@ -7,7 +7,7 @@ export default function Popup({ children }) {
   const { openClosePopup } = useContext(PopupContext);
 
   return (
-    <div className={`popup ${openClosePopup ? 'popup__open':''}`}>
+    <div className={`popup ${openClosePopup ? 'popup__open':''}`} >
         {children}
     </div>
   );

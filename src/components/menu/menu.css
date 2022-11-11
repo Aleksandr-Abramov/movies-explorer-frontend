@@ -70,6 +70,10 @@
   background: transparent url(../../images/svg/home-page/close.svg) no-repeat
     center center;
 }
+.menu__btn-close_toltip {
+  top: -30px;
+  right: -30px;
+}
 .menu__link_active {
   text-decoration: underline;
   text-underline-offset: 4px;

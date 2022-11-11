@@ -1,0 +1,25 @@
+.toltip {
+  position: relative;
+  margin: 300px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 430px;
+  height: 330px;
+  justify-content: center;
+  background: #272727;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.toltip__text {
+  width: 400px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
