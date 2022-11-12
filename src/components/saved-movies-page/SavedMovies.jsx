@@ -2,12 +2,15 @@ import React from 'react';
 import './savedMovies.css';
 import Footer from '../shared/footer/Footer'
 import Header from '../shared/header/Header';
-// import SearchForm from '../shared/search-form/SearchForm';
+import SearchForm from '../shared/search-form/SearchForm';
 import MainMenuAuthorized from '../shared/main-menu-authorized/MainMenuAuthorized';
-// import MoreContent from '../shared/more-content/MoreContent';
-// import MoviesCardList from '../shared/moviesCardList/MoviesCardList';
+import { useContext } from 'react';
+import MoviesCardList from '../shared/moviesCardList/MoviesCardList';
+import { SearchContext } from '../context/Context';
+import Preloader from '../shared/preloader/Preloader';
 
 export default function Movies() {
+  const { preloaderCondition } = useContext(SearchContext);
   return (
     <>
     
@@ -16,12 +19,13 @@ export default function Movies() {
     </Header>
     <main className='movies'>
       <div className="wrapper">
-      {/* <SearchForm /> */}
-         
+      <SearchForm />
+      <MoviesCardList/>
         {/* <MoreContent /> */}
       </div>
     </main> 
     <Footer/>
+    <Preloader preloaderCondition={preloaderCondition}/>
     </>
   );
 }

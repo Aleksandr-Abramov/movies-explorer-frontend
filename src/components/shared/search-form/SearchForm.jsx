@@ -2,14 +2,15 @@ import React from 'react';
 import {
   useState,
   //  useEffect,
-  //  useContext,
+   useContext,
 } from 'react';
-// import apiMovies from '../../../utils/MoviesApi';
 import './searchForm.css';
+import { SearchContext } from '../../context/Context';
 
+export default function SearchForm() {
+  const { handlerOnSubmit } = useContext(SearchContext);
 
-export default function SearchForm({ handlerOnSubmit }) {
-  const [checked] = useState(
+  const [checked, setChecked] = useState(
     localStorage.getItem('checkbox') === null
       ? false
       : JSON.parse(localStorage.getItem('checkbox'))
@@ -28,15 +29,18 @@ export default function SearchForm({ handlerOnSubmit }) {
     if (e.target.checked === true) {
       localStorage.setItem('checkbox', JSON.stringify(e.target.checked));
       setСheckboxСlass('search-form__circle_move');
+      setChecked(true);
     } else {
       localStorage.setItem('checkbox', JSON.stringify(e.target.checked));
       setСheckboxСlass('');
+      setChecked(false);
     }
   }
  
   function handlerInputChange(event) {
     event.preventDefault();
-    handlerOnSubmit(inputValue);
+    handlerOnSubmit(inputValue, checked);
+    // console.log(event);
   }
   
 
