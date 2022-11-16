@@ -23,12 +23,14 @@
   font-size: 11px;
   line-height: 13px;
   color: #ffffff;
-  unicode-bidi: bidi-override;
   direction: RTL;
   background: transparent;
   border: none;
   outline: none;
 }
+
+
+
 .profile-form__label {
   padding: 0 0 16px 0;
   font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
@@ -42,7 +44,7 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;
-  color: #ffffff;
+  color: gray;
   text-align: start;
 }
 .profile-form__label-container {
@@ -71,6 +73,11 @@
   cursor: pointer;
   background: none;
 }
+
+.profile-form-btn:disabled {
+  color: gray;
+  opacity: 0.8;
+}
 .exit-account {
   display: block;
   margin: 0 auto;
@@ -87,7 +94,7 @@
 @media only screen and (max-width: 768px) {
   .profile {
     padding: 236px 30px 0 30px;
-   }
+  }
   .profile__title {
     margin: 0 auto 96px auto;
   }
@@ -99,7 +106,7 @@
 @media only screen and (max-width: 425px) {
   .profile {
     padding: 70px 30px 0 30px;
-   }
+  }
   .profile__title {
     margin: 0 auto 80px auto;
   }

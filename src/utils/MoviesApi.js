@@ -2,7 +2,7 @@ import { BEATIFULMOVIESURL } from './constants';
 
 class ApiMovies {
   constructor(apiPathUrl) {
-    this._url = BEATIFULMOVIESURL.url;
+    this._url = apiPathUrl.url;
   }
 
   dataValidation(res) {

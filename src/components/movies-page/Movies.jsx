@@ -2,6 +2,8 @@ import React from 'react';
 import './movies.css';
 import Footer from '../shared/footer/Footer';
 import Header from '../shared/header/Header';
+import Popup from '../shared/popup/Popup';
+import Menu from '../menu/Menu';
 import SearchForm from '../shared/search-form/SearchForm';
 import MainMenuAuthorized from '../shared/main-menu-authorized/MainMenuAuthorized';
 import MoviesCardList from '../shared/moviesCardList/MoviesCardList';
@@ -99,11 +101,20 @@ export default function Movies() {
   //     // setHideBtn(true);
   //   }
   // }
-
+  // <Route exact path='/movies'>
+  //           <Header>
+  //             <MainMenuAuthorized/>
+  //           </Header>
+  //             <Movies />
+  //             <Popup>
+  //               <Menu />
+  //             </Popup>
+  //           <Footer/>
+  //         </Route> 
   return (
     <>
-      <Header bg='#202020'>
-        <MainMenuAuthorized />
+      <Header>
+        <MainMenuAuthorized/>
       </Header>
       <main className='movies'>
         <div className='wrapper'>
@@ -118,7 +129,10 @@ export default function Movies() {
            />
         </div>
       </main>
-      <Footer />
+      <Footer/>
+      <Popup>
+        <Menu />
+      </Popup>
       <Preloader preloaderCondition={preloaderCondition}/>
     </>
   );

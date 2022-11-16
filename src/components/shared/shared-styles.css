@@ -39,7 +39,22 @@
   color: #ffffff;
   font-weight: 400;
 }
+.server-error-message {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
 
+.form-input-errors {
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+}
 .shared-link {
   text-decoration: none;
   font-family: 'Inter-Medium', Arial, Helvetica, sans-serif;
