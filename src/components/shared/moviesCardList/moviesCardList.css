@@ -7,6 +7,29 @@
   border-top: 1px solid #424242;
 }
 
+.resultBlock {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 380px;
+  height: 100px;
+  background: #2f2f2f;
+  border-radius: 10px;
+  
+}
+.resultBlock__title {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  color: #8b8b8b;
+}
+
 @media only screen and (max-width: 1140px) {
   .movies-card-list {
     padding: 70px 30px 12px 30px;

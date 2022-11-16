@@ -23,14 +23,15 @@
   line-height: 17px;
   text-align: center;
   color: #ffffff;
-  background: #4285f4;
+  background: #3456f3;
+  
   border-radius: 3px;
   border: none;
   cursor: pointer;
 }
 
-.register__form-btn:hover {
-  background: #3456f3;
+.register__form-btn:disabled {
+  background: #4285f4;
   opacity: 0.8;
 }
 
