@@ -21,6 +21,7 @@ import apiMovies from '../utils/MoviesApi';
 import apiMoviesMain from '../utils/MainApi';
 import Toltip from './shared/toltip/Toltip';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
+// import { useLocation } from 'react-router-dom'
 
 
 function App() {
@@ -28,8 +29,11 @@ function App() {
   const [openCloseToltipPopup, setOpenCloseToltipPopup] = useState(false);
   const [movieData, setMovieData] = useState([]);
   const [searchMovieData, setSearchMovieData] = useState([]);
+  const [mainMovieData, setMainMovieData] = useState([]);
+  const [searchMainMovieData, setSearchMainMovieData] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [nothingFound, setNothingFound] = useState(false);
+  const [nothingFoundSavedMovies, setNothingFoundSavedMovies] = useState(false);
   const [hideBtn, setHideBtn] = useState(false);
   const [preloaderCondition, setPreloaderCondition] = useState(true);
   const [currentUser, setCurrentUser] = useState('');
@@ -42,23 +46,42 @@ function App() {
     ? 8
     : 12
   );
+
   const history = useHistory();
 
   /**
    * получение данных от сервиса beatfilm-movies
    */
-  useEffect(() => {
-    apiMovies
+  function getAllMainMovie() {
+    apiMoviesMain
       .getAllMovies()
-      .then(function (arr) {
-        setMovieData(arr);
+      .then((arr) => {
+        setMainMovieData(arr);
       })
       .catch(
         (err) => {
           handlerOpenToltipPopup();
-        }
-      );
-  }, []);
+      }
+    );
+  }
+
+  // console.log(mainMovieData);
+    /**
+   * получение данных от сервиса main-api
+   */
+     useEffect(() => {
+      apiMovies
+        .getAllMovies()
+        .then((arr) => {
+          setMovieData(arr);
+        })
+        .catch(
+          (err) => {
+            handlerOpenToltipPopup();
+          }
+        );
+    }, []);
+
 
   /**
    * вывод контента исходя из ширины экрана
@@ -120,6 +143,24 @@ function App() {
     }
   },[searchMovieData]);
 
+  useEffect(()=> {
+
+    if(JSON.parse(localStorage.getItem('saved-films')) === null) {
+      return;
+    }
+    if(searchMainMovieData.length === 0) {
+      if(JSON.parse(localStorage.getItem('saved-films')).length > 0) {
+        setNothingFoundSavedMovies(false);
+        return;
+      }
+      setNothingFoundSavedMovies(true);
+    }
+    if(searchMainMovieData.length !== 0) {
+      setNothingFoundSavedMovies(false);
+    }
+
+  },[searchMainMovieData]);
+
     useEffect(()=>{
       const userData = JSON.parse(localStorage.getItem('user')) || '';
       if (userData === '') {
@@ -133,8 +174,8 @@ function App() {
    * перезагрузка кнопки "ЕЩЕ".
    * фильтрация поисковых данных.
    */
-  function handlerOnSubmit(inputValueData, checked) {
-   
+  function handlerOnSubmit(inputValueData, checked, location) {
+
     setTimeout(()=> {
       setPreloaderCondition(true);
       setLastSlice(
@@ -144,7 +185,26 @@ function App() {
           ? 8
           : 12
       );
-      
+      if (location.pathname === '/saved-movies') {
+        if(checked) {
+          setSearchMainMovieData(mainMovieData.filter((film) => {
+            return film.duration < 40
+            &&  film.nameRU.toUpperCase().includes(inputValueData.toUpperCase());
+          }))
+          localStorage.setItem('saved-films', JSON.stringify(
+            mainMovieData.filter((film) => {
+              return film.duration < 40
+              &&  film.nameRU.toUpperCase().includes(inputValueData.toUpperCase());
+            })));
+            localStorage.setItem('saved-films-request', JSON.stringify(inputValueData));
+          return;
+        }
+        setSearchMainMovieData(mainMovieData.filter((film) => film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())));
+        setHideBtn(false);
+        localStorage.setItem('saved-films', JSON.stringify(mainMovieData.filter((film) => film.nameRU.toUpperCase().includes(inputValueData.toUpperCase()))));
+        localStorage.setItem('saved-films-request', JSON.stringify(inputValueData));
+        return;
+      }
       if(checked) {
         setSearchMovieData(movieData.filter((film) => {
           return film.duration < 40
@@ -217,6 +277,7 @@ function App() {
         setServerErrMessge('');
         getUserData();
         setLoggedIn(true);
+        getAllMainMovie()
         history.push('/movies');
       })
       .catch((err)=>{
@@ -291,6 +352,30 @@ function App() {
     })
   }
 
+  function hendlerSaveMovies(filmData) {
+    apiMoviesMain.createMovie(filmData)
+      .then((res) => {
+        console.log(res);
+        getAllMainMovie();
+      }).catch((err) => {
+        console.log(err);
+      })
+    // console.log(filmData);
+  }
+
+  function hendlerDeleteMovies(filmData) {
+    const movieID = mainMovieData.filter((item) => {
+      return item.movieId === filmData.id;
+    })
+    apiMoviesMain.deleteMovie(movieID[0]._id)
+      .then((res) => {
+        console.log(res);
+        getAllMainMovie();
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
   function serverErrorMessage(message) {
     setServerErrMessge(message);
   }
@@ -301,11 +386,15 @@ function App() {
         movieData,
         handlerOnSubmit,
         searchMovieData,
+        searchMainMovieData,
         hendlerMoreContent,
         hideBtn,
         lastSlice,
         nothingFound,
+        nothingFoundSavedMovies,
         preloaderCondition,
+        hendlerSaveMovies,
+        hendlerDeleteMovies
         }}>
         <PopupContext.Provider
           value={{

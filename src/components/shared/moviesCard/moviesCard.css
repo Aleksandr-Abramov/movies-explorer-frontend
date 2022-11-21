@@ -39,7 +39,7 @@
   line-height: 17px;
   color: #ffffff;
 }
-.movie-card__btn-save {
+/* .movie-card__btn-save {
   top: 14px;
   right: 14px;
   position: absolute;
@@ -56,10 +56,10 @@
   border-radius: 30px;
   border: none;
   cursor: pointer;
-}
+} */
 .movie-card__btn-del,
 .movie-card__btn-ok {
-  display: none;
+  display: block;
   top: 14px;
   right: 14px;
   position: absolute;
@@ -74,9 +74,20 @@
   background: #ee3465 url(../../../images/svg/home-page/ok-icon.svg) no-repeat
     center center;
 }
+.movie-card__btn-ok_unactive {
+  background: #313131 url(../../../images/svg/home-page/ok-icon.svg) no-repeat
+    center center;
+  
+}
+/* .movie-card__btn-del {
+  background: #313131 url(../../../images/svg/home-page/del-icon.svg) no-repeat
+    center center;
+    display: none;
+} */
 .movie-card__btn-del {
   background: #313131 url(../../../images/svg/home-page/del-icon.svg) no-repeat
     center center;
+    display: none;
 }
 @media only screen and (max-width: 826px) {
   .movie-card,

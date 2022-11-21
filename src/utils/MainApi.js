@@ -41,8 +41,8 @@ class ApiMoviesMain {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        sameSite: 'None',
-        secure: true,
+        // sameSite: 'None',
+        // secure: false,
       },
       body: JSON.stringify({
         email: email,
@@ -76,9 +76,56 @@ class ApiMoviesMain {
       }),
     }).then((res) => this.dataValidation(res));
   }
-
+  //выход 
   logout() {
     return fetch(`${this._url}/signout`, {
+      credentials: 'include',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    }).then((res) => this.dataValidation(res));
+  }
+
+  //создать фильм 
+  createMovie(data) {
+    return fetch(`${this._url}/movies`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        // sameSite: 'None',
+        // secure: false,
+      },
+      body: JSON.stringify({
+        "country": data.country,
+        "director": data.director,
+        "duration": data.duration,
+        "year": data.year,
+        "description": data.description,
+        "image": `https://api.nomoreparties.co/${data.image.url}`,
+        "trailer": data.trailerLink,
+        "nameRU": data.nameRU,
+        "nameEN": data.nameEN,
+        "thumbnail": "https://picsum.photos/200/300.jpg",
+        "movieId": data.id
+      }),
+    }).then((res) => this.dataValidation(res));
+  }
+  //удаление фильма
+  deleteMovie(idMovie) {
+    return fetch(`${this._url}/movies/${idMovie}`, {
+      credentials: 'include',
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    }).then((res) => this.dataValidation(res));
+  }
+
+  //получить все фильмы
+  getAllMovies() {
+    return fetch(`${this._url}/movies`, {
       credentials: 'include',
       method: 'GET',
       headers: {
