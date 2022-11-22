@@ -64,6 +64,17 @@
   color: #ffffff;
 }
 
+.server-error-message {
+  padding: 0;
+  margin: 40px 0 20px 0;
+  font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+}
+
 @media only screen and (max-width: 768px) {
   .main-page-paragraph {
     font-family: 'Inter-Regular', Arial, Helvetica, sans-serif;

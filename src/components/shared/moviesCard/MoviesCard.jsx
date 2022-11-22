@@ -1,57 +1,50 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import './moviesCard.css'
-import { SearchContext } from '../../context/Context'
+import { SearchContext, GlobalContext } from '../../context/Context'
 import { useLocation } from 'react-router-dom'
 
 export default function MoviesCard(props) {
-  const { hendlerSaveMovies, hendlerDeleteMovies } = useContext(SearchContext)
-  const [infoMovie] = useState(props);
-  const [like, setLike] = useState(true);
-  const location = useLocation();
-
-  let renderImage;
-  if (location.pathname === '/movies') {
-    renderImage = `https://api.nomoreparties.co/${props.image.url}`
-  }
-  if (location.pathname === '/saved-movies') {
-    renderImage = props.image
-  }
-  function hendlerClickLike() {
-    if (like) {
-      setLike(false);
-      hendlerSaveMovies(infoMovie);
-      
+  const { hendlerSaveMovies, hendlerDeleteMovies } = useContext(SearchContext);
+  const [isSaved, setIsSaved] = useState(props.isSaved);
+  const saveDelBtnClass = isSaved ? '' : 'movie-card__btn-ok_unactive';
+  
+  function hendlerClickLikeBtn() {
+    if(isSaved) {
+      setIsSaved(false);
+      hendlerDeleteMovies(props)
     } else {
-      setLike(true);
-      hendlerDeleteMovies(infoMovie);
+      hendlerSaveMovies(props);
+      setIsSaved(true);
     }
-    // hendlerSaveMovies(infoMovie)
-    // setLike((like) => !like)
-    console.log(like)
-  }
+  } 
+
   return (
     <div className='movie-card'>
       <div className='movie-card__image-container'>
         <a href={props.trailerLink} target='_blank' rel='noreferrer'>
           <img
-            // src={  `https://api.nomoreparties.co/${props.image.url}`}
-            src={renderImage}
-            alt={props.nameRU}
+            src={`https://api.nomoreparties.co/${props.image.url}`}
+            alt=''
             className='movie-card__image'
           />
         </a>
-        {/* <button type='button' className='movie-card__btn-save' >Сохранить</button> */}
-        {/* <button type='button' className='movie-card__btn-del'></button> */}
+
         <button
           type='button'
-          className={`movie-card__btn-ok ${like && 'movie-card__btn-ok_unactive'}`}
-          onClick={hendlerClickLike}
+          className={`movie-card__btn-ok ${saveDelBtnClass}`}
+          onClick={hendlerClickLikeBtn}
         ></button>
+
+        {/* <button
+            type='button'
+            className='movie-card__btn-del'
+
+          ></button> */}
       </div>
       <div className='movie-card__text-container'>
-        <h4 className='movie-card__name'>{props.nameRU}</h4>
-        <span className='movie-card__time'>{props.duration}мин</span>
+        <h4 className='movie-card__name' onClick={()=> console.log(props)}>{props.nameRU}</h4>
+        <span className='movie-card__time'>{props.duration}</span>
       </div>
     </div>
   )

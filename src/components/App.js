@@ -80,8 +80,34 @@ function App() {
             handlerOpenToltipPopup();
           }
         );
+      //   apiMoviesMain
+      //   .getAllMovies()
+      //   .then((arr) => {
+      //     setMainMovieData(arr);
+      //     console.log(arr);
+      //   })
+      //   .catch(
+      //     (err) => {
+      //       handlerOpenToltipPopup();
+      //   }
+      // );
     }, []);
-
+    // useEffect(() => {
+    //   if(loggedIn) {
+    //     apiMoviesMain
+    //     .getAllMovies()
+    //     .then((arr) => {
+    //       setMainMovieData(arr);
+    //       console.log(arr);
+    //     })
+    //     .catch(
+    //       (err) => {
+    //         handlerOpenToltipPopup();
+    //     }
+    //   );
+    //   }
+        
+    // }, [mainMovieData]);
 
   /**
    * вывод контента исходя из ширины экрана
@@ -355,22 +381,38 @@ function App() {
   function hendlerSaveMovies(filmData) {
     apiMoviesMain.createMovie(filmData)
       .then((res) => {
-        console.log(res);
         getAllMainMovie();
+        setSearchMainMovieData([res, ...mainMovieData]);
       }).catch((err) => {
         console.log(err);
       })
-    // console.log(filmData);
-  }
+   }
 
   function hendlerDeleteMovies(filmData) {
-    const movieID = mainMovieData.filter((item) => {
+    const [movieID] = mainMovieData.filter((item) => {
       return item.movieId === filmData.id;
-    })
-    apiMoviesMain.deleteMovie(movieID[0]._id)
+    });
+    apiMoviesMain.deleteMovie(movieID._id)
       .then((res) => {
-        console.log(res);
         getAllMainMovie();
+        setSearchMainMovieData((prevState)=> {
+          return prevState.filter((element) => {
+            return element._id !== res._id;
+          })
+        });
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+  function hendlerDeleteMainMovies(filmData) {
+    apiMoviesMain.deleteMovie(filmData)
+      .then((res) => {
+        getAllMainMovie();
+        setSearchMainMovieData((prevState)=> {
+          return prevState.filter((element) => {
+            return element._id !== res._id;
+          })
+        });
       }).catch((err) => {
         console.log(err);
       })
@@ -384,6 +426,7 @@ function App() {
     <GlobalContext.Provider value={{ currentUser, loggedIn }}>
       <SearchContext.Provider value={{
         movieData,
+        mainMovieData,
         handlerOnSubmit,
         searchMovieData,
         searchMainMovieData,
@@ -394,7 +437,8 @@ function App() {
         nothingFoundSavedMovies,
         preloaderCondition,
         hendlerSaveMovies,
-        hendlerDeleteMovies
+        hendlerDeleteMovies,
+        hendlerDeleteMainMovies
         }}>
         <PopupContext.Provider
           value={{

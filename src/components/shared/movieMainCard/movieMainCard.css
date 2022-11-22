@@ -79,16 +79,11 @@
     center center;
   
 }
-/* .movie-card__btn-del {
-  background: #313131 url(../../../images/svg/home-page/del-icon.svg) no-repeat
-    center center;
-    display: none;
-} */
+
 .movie-card__btn-del {
   background: #313131 url(../../../images/svg/home-page/del-icon.svg) no-repeat
-    center center;
-    display: block;
-    bottom: 50px;
+  center center;
+  display: block;
 }
 @media only screen and (max-width: 826px) {
   .movie-card,

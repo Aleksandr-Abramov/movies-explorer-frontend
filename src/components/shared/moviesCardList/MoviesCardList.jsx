@@ -1,13 +1,16 @@
-import React from 'react'
-import './moviesCardList.css'
-import { useContext } from 'react'
-import MoviesCard from '../moviesCard/MoviesCard'
-import MoreContent from '../more-content/MoreContent'
-import { SearchContext } from '../../context/Context'
-import { useLocation } from 'react-router-dom'
+import React from 'react';
+import './moviesCardList.css';
+import { useContext } from 'react';
+import MoviesCard from '../moviesCard/MoviesCard';
+import MovieMainCard from '../movieMainCard/MovieMainCard';
+import MoreContent from '../more-content/MoreContent';
+import { SearchContext } from '../../context/Context';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function MoviesCardList() {
   const {
+    mainMovieData,
     searchMovieData,
     searchMainMovieData,
     hendlerMoreContent,
@@ -15,32 +18,35 @@ export default function MoviesCardList() {
     lastSlice,
     nothingFound,
     nothingFoundSavedMovies,
-  } = useContext(SearchContext)
-  const location = useLocation()
-
+  } = useContext(SearchContext);
+  const location = useLocation();
+  const [mainMovieDataIDs] = useState(mainMovieData.map((film) => film.movieId));
+  // setSavedBeatFilmsIds(savedMovies.map((film) => film.movieId));
+  // console.log();
+  // console.log(mainMovieData);
   let searchRender
   if (location.pathname === '/movies') {
     searchRender =
       searchMovieData.length !== 0
         ? searchMovieData.slice(0, lastSlice).map((item) => {
-            return <MoviesCard key={item.id} {...item} />
+            return <MoviesCard key={item.id} {...item} isSaved={mainMovieDataIDs.includes(item.id)}/>
           })
         : JSON.parse(localStorage.getItem('films')) === null
         ? null
         : JSON.parse(localStorage.getItem('films')).map((item) => {
-            return <MoviesCard key={item.id} {...item} />
+            return <MoviesCard key={item.id} {...item} isSaved={mainMovieDataIDs.includes(item.id)}/>
           })
   }
   if (location.pathname === '/saved-movies') {
     searchRender =
       searchMainMovieData.length !== 0
         ? searchMainMovieData.slice(0, lastSlice).map((item) => {
-            return <MoviesCard key={item._id} {...item} />
+            return <MovieMainCard key={item._id} {...item} />
           })
         : JSON.parse(localStorage.getItem('saved-films')) === null
         ? null
         : JSON.parse(localStorage.getItem('saved-films')).map((item) => {
-            return <MoviesCard key={item.id} {...item} />
+            return <MovieMainCard key={item._id} {...item} />
           })
   }
 

@@ -14,10 +14,10 @@ export default function Footer() {
           <span className='home-page-footer__span'>© 2022</span>
 
           <div className='home-page-footer__links'>
-            <a href='https://practicum.yandex.ru/' className='shared-link home-page-footer__shared-link'>
+            <a href='https://practicum.yandex.ru/' target='blank' className='shared-link home-page-footer__shared-link'>
               Яндекс.Практикум
             </a>
-            <a href='https://github.com/Aleksandr-Abramov' className='shared-link home-page-footer__shared-link'>
+            <a href='https://github.com/Aleksandr-Abramov' target='blank' className='shared-link home-page-footer__shared-link'>
               Github
             </a>
           </div>
