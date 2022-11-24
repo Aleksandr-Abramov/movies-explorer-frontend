@@ -1,8 +1,7 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import './moviesCard.css'
-import { SearchContext, GlobalContext } from '../../context/Context'
-import { useLocation } from 'react-router-dom'
+import { SearchContext } from '../../context/Context'
 
 export default function MoviesCard(props) {
   const { hendlerSaveMovies, hendlerDeleteMovies } = useContext(SearchContext);
@@ -36,11 +35,6 @@ export default function MoviesCard(props) {
           onClick={hendlerClickLikeBtn}
         ></button>
 
-        {/* <button
-            type='button'
-            className='movie-card__btn-del'
-
-          ></button> */}
       </div>
       <div className='movie-card__text-container'>
         <h4 className='movie-card__name' onClick={()=> console.log(props)}>{props.nameRU}</h4>

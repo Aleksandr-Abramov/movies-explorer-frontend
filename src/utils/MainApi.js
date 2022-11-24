@@ -11,7 +11,7 @@ class ApiMoviesMain {
     if (res.ok) {
       return res.json();
     }
-    // console.log(res);
+    console.log(res);
     return Promise.reject(res.status);
   }
   /**

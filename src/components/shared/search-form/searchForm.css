@@ -16,7 +16,7 @@
   position: relative;
 }
 .search-form__checkbox {
-  display: block;
+  display: none;
 }
 .search-form__circle {
   width: 18px;

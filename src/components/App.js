@@ -61,6 +61,7 @@ function App() {
       .catch(
         (err) => {
           handlerOpenToltipPopup();
+          return;
       }
     );
   }
@@ -78,36 +79,11 @@ function App() {
         .catch(
           (err) => {
             handlerOpenToltipPopup();
+            return;
           }
         );
-      //   apiMoviesMain
-      //   .getAllMovies()
-      //   .then((arr) => {
-      //     setMainMovieData(arr);
-      //     console.log(arr);
-      //   })
-      //   .catch(
-      //     (err) => {
-      //       handlerOpenToltipPopup();
-      //   }
-      // );
     }, []);
-    // useEffect(() => {
-    //   if(loggedIn) {
-    //     apiMoviesMain
-    //     .getAllMovies()
-    //     .then((arr) => {
-    //       setMainMovieData(arr);
-    //       console.log(arr);
-    //     })
-    //     .catch(
-    //       (err) => {
-    //         handlerOpenToltipPopup();
-    //     }
-    //   );
-    //   }
-        
-    // }, [mainMovieData]);
+
 
   /**
    * вывод контента исходя из ширины экрана
@@ -292,6 +268,7 @@ function App() {
           return;
         }
         serverErrorMessage('На сервере произошла ошибка');
+        return;
       });
   }
   /**
@@ -303,7 +280,9 @@ function App() {
         setServerErrMessge('');
         getUserData();
         setLoggedIn(true);
-        getAllMainMovie()
+        getAllMainMovie();
+        setSearchMovieData([]);
+        setSearchMainMovieData([]);
         history.push('/movies');
       })
       .catch((err)=>{
@@ -316,7 +295,7 @@ function App() {
           return;
         }
         serverErrorMessage('На сервере произошла ошибка');
-        console.log(`login ${err}`);
+        return;
       })
   }
   /**
@@ -325,8 +304,9 @@ function App() {
   function exitApp() {
     apiMoviesMain.logout()
       .then((res) => {
-        localStorage.clear();
         setLoggedIn(false);
+
+        localStorage.clear();
         history.push('/');
       });
   }
@@ -350,7 +330,7 @@ function App() {
           return;
         }
         serverErrorMessage('На сервере произошла ошибка');
-        console.log(`getUserData ${err}`);
+        return;
     })
   }
 
@@ -374,7 +354,7 @@ function App() {
         return;
       }
       serverErrorMessage('На сервере произошла ошибка');
-      console.log(`getUserData ${err}`);
+      return;
     })
   }
 
@@ -384,7 +364,12 @@ function App() {
         getAllMainMovie();
         setSearchMainMovieData([res, ...mainMovieData]);
       }).catch((err) => {
-        console.log(err);
+        if(err === 400) {
+          serverErrorMessage('Переданы некорректные данные при добавлении фильма.');
+          return;
+        }
+        serverErrorMessage('На сервере произошла ошибка');
+        return;
       })
    }
 
@@ -401,7 +386,20 @@ function App() {
           })
         });
       }).catch((err) => {
-        console.log(err);
+        if(err === 404) {
+          serverErrorMessage('Фильм с указанным _id не найден');
+          return;
+        }
+        if(err === 403) {
+          serverErrorMessage('Вы не можите удалять чужой фильм');
+          return;
+        }
+        if(err === 400) {
+          serverErrorMessage('Переданны некорректные данные');
+          return;
+        }
+        serverErrorMessage('На сервере произошла ошибка');
+        return;
       })
   }
   function hendlerDeleteMainMovies(filmData) {
@@ -414,7 +412,20 @@ function App() {
           })
         });
       }).catch((err) => {
-        console.log(err);
+        if(err === 404) {
+          serverErrorMessage('Фильм с указанным _id не найден');
+          return;
+        }
+        if(err === 403) {
+          serverErrorMessage('Вы не можите удалять чужой фильм');
+          return;
+        }
+        if(err === 400) {
+          serverErrorMessage('Переданны некорректные данные');
+          return;
+        }
+        serverErrorMessage('На сервере произошла ошибка');
+        return;
       })
   }
 

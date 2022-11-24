@@ -20,10 +20,9 @@ export default function MoviesCardList() {
     nothingFoundSavedMovies,
   } = useContext(SearchContext);
   const location = useLocation();
+  //BeatfilmMoviesApi
   const [mainMovieDataIDs] = useState(mainMovieData.map((film) => film.movieId));
-  // setSavedBeatFilmsIds(savedMovies.map((film) => film.movieId));
-  // console.log();
-  // console.log(mainMovieData);
+
   let searchRender
   if (location.pathname === '/movies') {
     searchRender =
