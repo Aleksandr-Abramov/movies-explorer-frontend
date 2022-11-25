@@ -1,9 +1,9 @@
 import React from 'react';
 import './toltip.css';
-import { PopupContext } from '../../context/Context';
+import { GlobalContext } from '../../context/Context';
 import { useContext } from 'react';
 export default function Toltip({ children }) {
-  const { handlerCloseToltipPopup } = useContext(PopupContext);
+  const { handlerCloseToltipPopup } = useContext(GlobalContext);
   return (
     <div className='toltip'>
         <p className='toltip__text'>{children}</p>

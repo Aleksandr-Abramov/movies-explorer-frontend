@@ -3,11 +3,12 @@ import './login.css'
 import logo from '../../../images/svg/home-page/logo.svg'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
-import { UsersContext } from '../../context/Context'
+import { GlobalContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
 
 export default function Login() {
-  const { login, serverErrMessge, setServerErrMessge } = useContext(UsersContext);
+  const { login, serverErrMessge, setServerErrMessge } =
+    useContext(GlobalContext)
 
   const {
     register,
@@ -18,14 +19,13 @@ export default function Login() {
     mode: 'onChange',
   })
 
-
   function handlerOnSubmit(data) {
-    login(data);
-    reset();
+    login(data)
+    reset()
   }
 
   function handlerOnFocusInput() {
-    setServerErrMessge('');
+    setServerErrMessge('')
   }
   return (
     <main className='login'>

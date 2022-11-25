@@ -2,10 +2,10 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import './searchForm.css'
-import { SearchContext } from '../../context/Context'
+import { GlobalContext } from '../../context/Context'
 
 export default function SearchForm() {
-  const { handlerOnSubmit } = useContext(SearchContext)
+  const { handlerOnSubmit } = useContext(GlobalContext)
   const [checked, setChecked] = useState(
     localStorage.getItem('checkbox') === null
       ? false

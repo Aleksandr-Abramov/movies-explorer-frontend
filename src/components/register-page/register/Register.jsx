@@ -1,13 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './register.css';
+import './register.css'
 import logo from '../../../images/svg/home-page/logo.svg'
 import { useContext } from 'react'
-import { UsersContext } from '../../context/Context'
+import { GlobalContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
 
 export default function Register() {
-  const { createUser, serverErrMessge, setServerErrMessge } = useContext(UsersContext);
+  const { createUser, serverErrMessge, setServerErrMessge } =
+    useContext(GlobalContext)
 
   const {
     register,
@@ -20,11 +21,11 @@ export default function Register() {
 
   function handlerOnSubmit(data) {
     createUser(data)
-    reset();
+    reset()
   }
-  
+
   function handlerOnFocusInput() {
-    setServerErrMessge('');
+    setServerErrMessge('')
   }
   return (
     <main className='register'>
@@ -63,7 +64,8 @@ export default function Register() {
               },
               pattern: {
                 value: /[A-Za-zА-Яа-яЁё\\s-]+/,
-                message: 'поле name содержит только латиницу, кириллицу, пробел или дефис',
+                message:
+                  'поле name содержит только латиницу, кириллицу, пробел или дефис',
               },
             })}
           />
@@ -118,7 +120,11 @@ export default function Register() {
             {errors.password && errors.password.message}
           </p>
           <p className='server-error-message'>{serverErrMessge}</p>
-          <button type='submit' className='register__form-btn' disabled={!isValid}>
+          <button
+            type='submit'
+            className='register__form-btn'
+            disabled={!isValid}
+          >
             Зарегистрироваться
           </button>
         </form>

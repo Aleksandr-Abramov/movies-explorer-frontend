@@ -16,12 +16,7 @@ import Menu from './menu/Menu'
 import Popup from './shared/popup/Popup'
 import ToltioPopup from './toltipPopup/ToltipPopup'
 import { useState, useEffect } from 'react'
-import {
-  PopupContext,
-  SearchContext,
-  UsersContext,
-  GlobalContext,
-} from './context/Context'
+import { GlobalContext } from './context/Context'
 import apiMovies from '../utils/MoviesApi'
 import apiMoviesMain from '../utils/MainApi'
 import Toltip from './shared/toltip/Toltip'
@@ -172,6 +167,7 @@ function App() {
    * перезагрузка кнопки "ЕЩЕ".
    * фильтрация поисковых данных.
    */
+
   function handlerOnSubmit(inputValueData, checked, location) {
     setTimeout(() => {
       setPreloaderCondition(true)
@@ -182,6 +178,7 @@ function App() {
           ? 8
           : 12
       )
+
       if (location.pathname === '/saved-movies') {
         if (checked) {
           setSearchMainMovieData(
@@ -492,90 +489,79 @@ function App() {
     setServerErrMessge(message)
   }
   return (
-    <Switch>
-      <GlobalContext.Provider value={{ currentUser, loggedIn }}>
-        <SearchContext.Provider
-          value={{
-            movieData,
-            mainMovieData,
-            handlerOnSubmit,
-            searchMovieData,
-            searchMainMovieData,
-            hendlerMoreContent,
-            hideBtn,
-            lastSlice,
-            nothingFound,
-            nothingFoundSavedMovies,
-            preloaderCondition,
-            hendlerSaveMovies,
-            hendlerDeleteMovies,
-            hendlerDeleteMainMovies,
-          }}
-        >
-          <PopupContext.Provider
-            value={{
-              handlerOpenPopup,
-              openClosePopup,
-              handlerClosePopup,
-              openCloseToltipPopup,
-              handlerCloseToltipPopup,
-              handlerOpenToltipPopup,
-            }}
-          >
-            <Route exact path='/'>
-              <Header>
-                {loggedIn ? <MainMenuAuthorized /> : <MainMenuUnauthorized />}
-              </Header>
-              <Main />
-              <Footer />
-              <Popup>
-                <Menu />
-              </Popup>
-              <ToltioPopup>
-                <Toltip>
-                  Во время запроса произошла ошибка. Возможно, проблема с
-                  соединением или сервер недоступен. Подождите немного и
-                  попробуйте ещё раз
-                </Toltip>
-              </ToltioPopup>
-            </Route>
-            <UsersContext.Provider
-              value={{
-                login,
-                createUser,
-                handlerChangeUser,
-                serverErrMessge,
-                exitApp,
-                setServerErrMessge,}}>
-              <Route path='/signin'>
-                <Login />
-              </Route>
-              <Route path='/signup'>
-                <Register />
-              </Route>
-              <ProtectedRoute
-                path='/profile'
-                loggedIn={loggedIn}
-                component={Profile}
-              />
-            </UsersContext.Provider>
-            <ProtectedRoute
-              path='/movies'
-              loggedIn={loggedIn}
-              component={Movies}
-            />
-            <ProtectedRoute
-              path='/saved-movies'
-              loggedIn={loggedIn}
-              component={SavedMovies}
-            />
-            <Route path='*'>
-              <NotFound404 />
-            </Route>
-          </PopupContext.Provider>
-        </SearchContext.Provider>
-      </GlobalContext.Provider>
-    </Switch>
+    <GlobalContext.Provider
+      value={{
+        currentUser,
+        loggedIn,
+        movieData,
+        mainMovieData,
+        handlerOnSubmit,
+        searchMovieData,
+        searchMainMovieData,
+        hendlerMoreContent,
+        hideBtn,
+        lastSlice,
+        nothingFound,
+        nothingFoundSavedMovies,
+        preloaderCondition,
+        hendlerSaveMovies,
+        hendlerDeleteMovies,
+        hendlerDeleteMainMovies,
+        handlerOpenPopup,
+        openClosePopup,
+        handlerClosePopup,
+        openCloseToltipPopup,
+        handlerCloseToltipPopup,
+        handlerOpenToltipPopup,
+        handlerChangeUser,
+        serverErrMessge,
+        exitApp,
+        setServerErrMessge,
+        login,
+        createUser,
+      }}
+    >
+      <Switch>
+        <Route exact path='/'>
+          <Header>
+            {loggedIn ? <MainMenuAuthorized /> : <MainMenuUnauthorized />}
+          </Header>
+          <Main />
+          <Footer />
+          <Popup>
+            <Menu />
+          </Popup>
+          <ToltioPopup>
+            <Toltip>
+              Во время запроса произошла ошибка. Возможно, проблема с
+              соединением или сервер недоступен. Подождите немного и попробуйте
+              ещё раз
+            </Toltip>
+          </ToltioPopup>
+        </Route>
+        <Route path='/signin'>
+          <Login />
+        </Route>
+        <Route path='/signup'>
+          <Register />
+        </Route>
+        <ProtectedRoute
+          path='/profile'
+          loggedIn={loggedIn}
+          component={Profile}
+        />
+        <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} />
+        <ProtectedRoute
+          path='/saved-movies'
+          loggedIn={loggedIn}
+          component={SavedMovies}
+        />
+
+        <Route path='*'>
+          <NotFound404 />
+        </Route>
+      </Switch>
+    </GlobalContext.Provider>
   )
 }
 

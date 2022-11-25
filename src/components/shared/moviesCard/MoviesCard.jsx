@@ -1,22 +1,22 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import './moviesCard.css'
-import { SearchContext } from '../../context/Context'
+import { GlobalContext } from '../../context/Context'
 
 export default function MoviesCard(props) {
-  const { hendlerSaveMovies, hendlerDeleteMovies } = useContext(SearchContext);
-  const [isSaved, setIsSaved] = useState(props.isSaved);
-  const saveDelBtnClass = isSaved ? '' : 'movie-card__btn-ok_unactive';
-  
+  const { hendlerSaveMovies, hendlerDeleteMovies } = useContext(GlobalContext)
+  const [isSaved, setIsSaved] = useState(props.isSaved)
+  const saveDelBtnClass = isSaved ? '' : 'movie-card__btn-ok_unactive'
+
   function hendlerClickLikeBtn() {
-    if(isSaved) {
-      setIsSaved(false);
+    if (isSaved) {
+      setIsSaved(false)
       hendlerDeleteMovies(props)
     } else {
-      hendlerSaveMovies(props);
-      setIsSaved(true);
+      hendlerSaveMovies(props)
+      setIsSaved(true)
     }
-  } 
+  }
 
   return (
     <div className='movie-card'>
@@ -34,10 +34,11 @@ export default function MoviesCard(props) {
           className={`movie-card__btn-ok ${saveDelBtnClass}`}
           onClick={hendlerClickLikeBtn}
         ></button>
-
       </div>
       <div className='movie-card__text-container'>
-        <h4 className='movie-card__name' onClick={()=> console.log(props)}>{props.nameRU}</h4>
+        <h4 className='movie-card__name' onClick={() => console.log(props)}>
+          {props.nameRU}
+        </h4>
         <span className='movie-card__time'>{props.duration}</span>
       </div>
     </div>

@@ -1,11 +1,10 @@
 import React from 'react'
 import { useContext } from 'react'
 import './movieMainCard.css'
-import { SearchContext } from '../../context/Context'
+import { GlobalContext } from '../../context/Context'
 
 export default function MovieMainCard(props) {
-  const { hendlerDeleteMainMovies } = useContext(SearchContext);
-  
+  const { hendlerDeleteMainMovies } = useContext(GlobalContext)
 
   function deleteMovies() {
     hendlerDeleteMainMovies(props._id)
@@ -21,7 +20,11 @@ export default function MovieMainCard(props) {
           />
         </a>
 
-        <button type='button' className='movie-card__btn-del' onClick={deleteMovies}></button>
+        <button
+          type='button'
+          className='movie-card__btn-del'
+          onClick={deleteMovies}
+        ></button>
       </div>
       <div className='movie-card__text-container'>
         <h4 className='movie-card__name'>{props.nameRU}</h4>

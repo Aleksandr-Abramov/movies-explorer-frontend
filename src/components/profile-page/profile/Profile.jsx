@@ -5,12 +5,17 @@ import Popup from '../../shared/popup/Popup'
 import Menu from '../../menu/Menu'
 import MainMenuAuthorized from '../../shared/main-menu-authorized/MainMenuAuthorized'
 import { useContext } from 'react'
-import { GlobalContext, UsersContext } from '../../context/Context'
+import { GlobalContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
 
 export default function Profile() {
-  const { currentUser } = useContext(GlobalContext)
-  const { handlerChangeUser, serverErrMessge, exitApp, setServerErrMessge } = useContext(UsersContext)
+  const {
+    handlerChangeUser,
+    serverErrMessge,
+    exitApp,
+    setServerErrMessge,
+    currentUser,
+  } = useContext(GlobalContext)
 
   const {
     register,
@@ -22,15 +27,15 @@ export default function Profile() {
   })
 
   function handlerOnSubmit(data) {
-    handlerChangeUser(data);
-    reset();
+    handlerChangeUser(data)
+    reset()
   }
   function logout() {
-    exitApp();
+    exitApp()
   }
 
   function handlerOnFocusInput() {
-    setServerErrMessge('');
+    setServerErrMessge('')
   }
   return (
     <>
@@ -75,7 +80,8 @@ export default function Profile() {
                 },
                 pattern: {
                   value: /[A-Za-zА-Яа-яЁё\\s-]+/,
-                  message: 'поле name содержит только латиницу, кириллицу, пробел или дефис',
+                  message:
+                    'поле name содержит только латиницу, кириллицу, пробел или дефис',
                 },
               })}
             />
@@ -110,7 +116,11 @@ export default function Profile() {
             {errors.email && errors.email.message}
           </p>
           <p className='server-error-message'>{serverErrMessge}</p>
-          <button type='submit' className='profile-form-btn' disabled={!isValid}>
+          <button
+            type='submit'
+            className='profile-form-btn'
+            disabled={!isValid}
+          >
             Редактировать
           </button>
         </form>
