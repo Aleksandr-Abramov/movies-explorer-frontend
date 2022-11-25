@@ -1,29 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './register.css'
+import './register.css';
 import logo from '../../../images/svg/home-page/logo.svg'
 import { useContext } from 'react'
 import { UsersContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
 
 export default function Register() {
-  const { createUser, serverErrMessge } = useContext(UsersContext)
-  // const [inputData, setInputData] = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
-
-  // function handlerInputChange(event) {
-  //   const { value, name } = event.target;
-  //   setInputData({ ...inputData, [name]: value });
-  // }
-
-  // function handlerOnSubmit(event) {
-  //   event.preventDefault();
-  //   const { ...data } = inputData;
-  //   createUser(data);
-  // }
+  const { createUser, serverErrMessge, setServerErrMessge } = useContext(UsersContext);
 
   const {
     register,
@@ -37,6 +21,10 @@ export default function Register() {
   function handlerOnSubmit(data) {
     createUser(data)
     reset();
+  }
+  
+  function handlerOnFocusInput() {
+    setServerErrMessge('');
   }
   return (
     <main className='register'>
@@ -59,6 +47,7 @@ export default function Register() {
             name='name'
             id='name'
             className='shared-input'
+            onFocus={handlerOnFocusInput}
             {...register('name', {
               required: {
                 value: true,
@@ -90,6 +79,7 @@ export default function Register() {
             name='email'
             id='email'
             className='shared-input'
+            onFocus={handlerOnFocusInput}
             {...register('email', {
               required: {
                 value: true,
@@ -112,6 +102,7 @@ export default function Register() {
             name='password'
             id='password'
             className='shared-input'
+            onFocus={handlerOnFocusInput}
             {...register('password', {
               required: {
                 value: true,

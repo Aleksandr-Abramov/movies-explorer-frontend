@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form'
 
 export default function Profile() {
   const { currentUser } = useContext(GlobalContext)
-  const { handlerChangeUser, serverErrMessge, exitApp } = useContext(UsersContext)
+  const { handlerChangeUser, serverErrMessge, exitApp, setServerErrMessge } = useContext(UsersContext)
 
   const {
     register,
@@ -27,6 +27,10 @@ export default function Profile() {
   }
   function logout() {
     exitApp();
+  }
+
+  function handlerOnFocusInput() {
+    setServerErrMessge('');
   }
   return (
     <>
@@ -55,6 +59,7 @@ export default function Profile() {
               id='name'
               name='name'
               placeholder={currentUser.name && currentUser.name}
+              onFocus={handlerOnFocusInput}
               {...register('name', {
                 required: {
                   value: true,
@@ -88,6 +93,7 @@ export default function Profile() {
               id='email'
               name='email'
               placeholder={currentUser.name && currentUser.email}
+              onFocus={handlerOnFocusInput}
               {...register('email', {
                 required: {
                   value: true,

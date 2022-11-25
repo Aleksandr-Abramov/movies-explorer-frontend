@@ -1,15 +1,14 @@
 import React from 'react'
 import './login.css'
-import Input from '../../shared/input/Input'
 import logo from '../../../images/svg/home-page/logo.svg'
 import { Link } from 'react-router-dom'
-import { useState, useContext } from 'react'
-import { GlobalContext, UsersContext } from '../../context/Context'
+import { useContext } from 'react'
+import { UsersContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
 
 export default function Login() {
-  const { login, serverErrMessge } = useContext(UsersContext)
-  const { currentUser } = useContext(GlobalContext)
+  const { login, serverErrMessge, setServerErrMessge } = useContext(UsersContext);
+
   const {
     register,
     handleSubmit,
@@ -18,19 +17,15 @@ export default function Login() {
   } = useForm({
     mode: 'onChange',
   })
-  // const [inputData, setInputData] = useState({
-  //   email: '',
-  //   password: '',
-  // });
 
-  // function handlerInputChange(event) {
-  //   const { value, name } = event.target;
-  //   setInputData({ ...inputData, [name]: value });
-  // }
 
   function handlerOnSubmit(data) {
     login(data);
     reset();
+  }
+
+  function handlerOnFocusInput() {
+    setServerErrMessge('');
   }
   return (
     <main className='login'>
@@ -53,6 +48,7 @@ export default function Login() {
             name='email'
             id='email'
             className='shared-input'
+            onFocus={handlerOnFocusInput}
             {...register('email', {
               required: {
                 value: true,
@@ -75,6 +71,7 @@ export default function Login() {
             name='password'
             id='password'
             className='shared-input'
+            onFocus={handlerOnFocusInput}
             {...register('password', {
               required: {
                 value: true,

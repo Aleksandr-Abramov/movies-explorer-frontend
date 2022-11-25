@@ -1,8 +1,7 @@
 import React from 'react'
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import './movieMainCard.css'
-import { SearchContext, GlobalContext } from '../../context/Context'
-import { useLocation } from 'react-router-dom'
+import { SearchContext } from '../../context/Context'
 
 export default function MovieMainCard(props) {
   const { hendlerDeleteMainMovies } = useContext(SearchContext);

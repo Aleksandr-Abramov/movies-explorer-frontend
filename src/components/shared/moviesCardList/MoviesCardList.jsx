@@ -6,7 +6,6 @@ import MovieMainCard from '../movieMainCard/MovieMainCard';
 import MoreContent from '../more-content/MoreContent';
 import { SearchContext } from '../../context/Context';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
 
 export default function MoviesCardList() {
   const {
@@ -21,7 +20,7 @@ export default function MoviesCardList() {
   } = useContext(SearchContext);
   const location = useLocation();
   //BeatfilmMoviesApi
-  const [mainMovieDataIDs] = useState(mainMovieData.map((film) => film.movieId));
+  const mainMovieDataIDs = mainMovieData.map((film) => film.movieId);
 
   let searchRender
   if (location.pathname === '/movies') {
