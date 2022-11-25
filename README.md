@@ -6,4 +6,6 @@
 
 ## https://github.com/Aleksandr-Abramov/movies-explorer-api
 
+## Pull Requests https://github.com/Aleksandr-Abramov/movies-explorer-frontend/pull/3
+
 ### Александр Абрамов
