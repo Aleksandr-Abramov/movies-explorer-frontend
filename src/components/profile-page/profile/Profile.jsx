@@ -7,6 +7,7 @@ import MainMenuAuthorized from '../../shared/main-menu-authorized/MainMenuAuthor
 import { useContext } from 'react'
 import { GlobalContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 
 export default function Profile() {
   const {
@@ -15,27 +16,38 @@ export default function Profile() {
     exitApp,
     setServerErrMessge,
     currentUser,
+    setCurrentUser,
+    handlerChangeCurrentUser
   } = useContext(GlobalContext)
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors, isValid, },
   } = useForm({
     mode: 'onChange',
   })
+  const [nameValue, setNameValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
 
   function handlerOnSubmit(data) {
+    if(currentUser.name === data.name && currentUser.email === data.email) {
+      setServerErrMessge('name и email полностью совтодают. Необходимо, что бы один из параметров отличался.');
+      return;
+    }
     handlerChangeUser(data)
     reset()
+    handlerChangeCurrentUser(data, currentUser)
   }
   function logout() {
     exitApp()
   }
 
   function handlerOnFocusInput() {
-    setServerErrMessge('')
+    setServerErrMessge('');
+    setNameValue(currentUser.name ? currentUser.name : '')
+    setEmailValue(currentUser.email ? currentUser.email : '')
   }
   return (
     <>
@@ -63,7 +75,8 @@ export default function Profile() {
               className='profile-form__input'
               id='name'
               name='name'
-              placeholder={currentUser.name && currentUser.name}
+              defaultValue={currentUser.name}
+              placeholder='Введите имя'
               onFocus={handlerOnFocusInput}
               {...register('name', {
                 required: {
@@ -98,7 +111,9 @@ export default function Profile() {
               className='profile-form__input'
               id='email'
               name='email'
-              placeholder={currentUser.name && currentUser.email}
+              defaultValue={currentUser.email}
+              placeholder='Введите email'
+              
               onFocus={handlerOnFocusInput}
               {...register('email', {
                 required: {

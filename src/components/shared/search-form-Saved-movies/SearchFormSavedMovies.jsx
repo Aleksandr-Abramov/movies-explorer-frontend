@@ -1,49 +1,26 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-import './searchForm.css'
+import './searchFormSavedMovies.css'
 import { GlobalContext } from '../../context/Context'
 import { useEffect } from 'react'
 
-export default function SearchForm() {
+export default function SearchFormSavedMovies() {
   const { handlerOnSubmit } = useContext(GlobalContext)
-  const [checked, setChecked] = useState(
-    localStorage.getItem('checkbox') === null
-      ? false
-      : JSON.parse(localStorage.getItem('checkbox'))
-  )
+  const [checked, setChecked] = useState(false)
   const location = useLocation()
 
   
-  let searchInput
-  if (location.pathname === '/movies') {
-    if (localStorage.getItem('request') === null) {
-      searchInput = ''
-    } else {
-      searchInput = localStorage.getItem('request').slice(1, -1)
-    }
-  } 
-  
-  //  else if (location.pathname === '/saved-movies') {
-  //   if (localStorage.getItem('saved-films-request') === null) {
-  //     searchInput = ''
-  //   } else {
-  //     searchInput = localStorage.getItem('saved-films-request').slice(1, -1)
-  //   }
-  // }
-
-  const [inputValue, setInputValue] = useState(searchInput)
+  const [inputValue, setInputValue] = useState('')
   const [checkboxСlass, setСheckboxСlass] = useState(
     checked ? 'search-form__circle_move' : ''
   )
 
   function handlerCheckboxChange(e) {
     if (e.target.checked === true) {
-      localStorage.setItem('checkbox', JSON.stringify(e.target.checked))
       setСheckboxСlass('search-form__circle_move')
       setChecked(true)
     } else {
-      localStorage.setItem('checkbox', JSON.stringify(e.target.checked))
       setСheckboxСlass('')
       setChecked(false)
     }

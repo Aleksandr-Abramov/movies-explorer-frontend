@@ -100,7 +100,7 @@ export default function Register() {
             Пароль
           </label>
           <input
-            type='text'
+            type='password'
             name='password'
             id='password'
             className='shared-input'
