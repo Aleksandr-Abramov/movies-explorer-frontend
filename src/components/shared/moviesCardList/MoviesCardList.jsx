@@ -2,7 +2,6 @@ import React from 'react'
 import './moviesCardList.css'
 import { useContext } from 'react'
 import MoviesCard from '../moviesCard/MoviesCard'
-import MovieMainCard from '../movieMainCard/MovieMainCard'
 import MoreContent from '../more-content/MoreContent'
 import { GlobalContext } from '../../context/Context'
 import { useLocation } from 'react-router-dom'
@@ -11,7 +10,6 @@ export default function MoviesCardList() {
   const {
     mainMovieData,
     searchMovieData,
-
     hendlerMoreContent,
     hideBtn,
     lastSlice,
@@ -19,6 +17,7 @@ export default function MoviesCardList() {
   } = useContext(GlobalContext)
   const location = useLocation()
   //BeatfilmMoviesApi
+
   const mainMovieDataIDs = mainMovieData.map((film) => film.movieId)
 
   const searchRender =
@@ -53,7 +52,7 @@ export default function MoviesCardList() {
         </div>
       )}
 
-      {searchMovieData.length !== 0 && (
+      {searchMovieData.length !== 0 && searchMovieData.length !== lastSlice && (
         <MoreContent
           hendlerMoreContent={hendlerMoreContent}
           hideBtn={hideBtn}

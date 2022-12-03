@@ -1,5 +1,4 @@
 import React from 'react'
-import './mainMovieCardList.css'
 import { useContext } from 'react'
 import MovieMainCard from '../movieMainCard/MovieMainCard'
 import { GlobalContext } from '../../context/Context'

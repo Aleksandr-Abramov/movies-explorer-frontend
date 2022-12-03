@@ -7,7 +7,6 @@ import MainMenuAuthorized from '../../shared/main-menu-authorized/MainMenuAuthor
 import { useContext } from 'react'
 import { GlobalContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
 
 export default function Profile() {
   const {
@@ -16,25 +15,24 @@ export default function Profile() {
     exitApp,
     setServerErrMessge,
     currentUser,
-    setCurrentUser,
-    handlerChangeCurrentUser
+    handlerChangeCurrentUser,
   } = useContext(GlobalContext)
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid, },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
   })
-  const [nameValue, setNameValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
 
   function handlerOnSubmit(data) {
-    if(currentUser.name === data.name && currentUser.email === data.email) {
-      setServerErrMessge('name и email полностью совтодают. Необходимо, что бы один из параметров отличался.');
-      return;
+    if (currentUser.name === data.name && currentUser.email === data.email) {
+      setServerErrMessge(
+        'name и email полностью совтодают c предыдущими. Необходимо, что бы один из параметров отличался.'
+      )
+      return
     }
     handlerChangeUser(data)
     reset()
@@ -45,9 +43,7 @@ export default function Profile() {
   }
 
   function handlerOnFocusInput() {
-    setServerErrMessge('');
-    setNameValue(currentUser.name ? currentUser.name : '')
-    setEmailValue(currentUser.email ? currentUser.email : '')
+    setServerErrMessge('')
   }
   return (
     <>
@@ -113,7 +109,6 @@ export default function Profile() {
               name='email'
               defaultValue={currentUser.email}
               placeholder='Введите email'
-              
               onFocus={handlerOnFocusInput}
               {...register('email', {
                 required: {

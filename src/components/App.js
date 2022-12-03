@@ -20,19 +20,19 @@ import { GlobalContext } from './context/Context'
 import apiMovies from '../utils/MoviesApi'
 import apiMoviesMain from '../utils/MainApi'
 import Toltip from './shared/toltip/Toltip'
-import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 
 function App() {
   const [openClosePopup, setOpenClosePopup] = useState(false)
   const [openCloseToltipPopup, setOpenCloseToltipPopup] = useState(false)
   const [movieData, setMovieData] = useState([])
-  const [renderStartMovie, setRenderStartMovie] = useState(false);
+  const [renderStartMovie, setRenderStartMovie] = useState(false)
   const [searchMovieData, setSearchMovieData] = useState([])
   const [mainMovieData, setMainMovieData] = useState([])
   const [searchMainMovieData, setSearchMainMovieData] = useState([])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const [nothingFound, setNothingFound] = useState(false)
-  const [nothingFoundSavedMovies, setNothingFoundSavedMovies] = useState(true)
+  const [nothingFoundSavedMovies] = useState(true)
   const [hideBtn, setHideBtn] = useState(false)
   const [preloaderCondition, setPreloaderCondition] = useState(true)
   const [currentUser, setCurrentUser] = useState('')
@@ -46,9 +46,9 @@ function App() {
       : 12
   )
 
-  const history = useHistory();
-  const location = useLocation();
-
+  const history = useHistory()
+  const location = useLocation()
+  const [locationPath] = useState(location.pathname)
   /**
    * получение данных от сервиса beatfilm-movies
    */
@@ -64,60 +64,58 @@ function App() {
       })
   }
 
-  // console.log(mainMovieData);
   /**
    * получение данных от сервиса main-api
    */
   useEffect(() => {
     apiMovies
-      .getAllMovies()
-      .then((arr) => {
-        setMovieData(arr)
+    .getAllMovies()
+    .then((arr) => {
+      setMovieData(arr)
+    })
+    .catch((err) => {
+      handlerOpenToltipPopup()
+    })
+    if (localStorage.getItem('authKey') !== 'true') {
+      return
+    }
+    apiMoviesMain
+      .getUserData()
+      .then((res) => {
+        if (res.id) {
+          setLoggedIn(true)
+          setCurrentUser(res)
+          setRenderStartMovie(true)
+          setSearchMovieData([])
+          setSearchMainMovieData([])
+          localStorage.removeItem('films')
+          getAllMainMovie()
+          history.push(locationPath)
+        }
+        return
       })
       .catch((err) => {
-        handlerOpenToltipPopup()
+        if (err === 401) {
+          setLoggedIn(false)
+          setCurrentUser({})
+          history.push('/')
+          return
+        }
         return
-      });
-    // apiMoviesMain
-    //   .getUserData()
-    //   .then((user)=> {
-    //     // setCurrentUser({ ...user })
-    //     // console.log(currentUser);
-    //     console.log(user);
-    //   })
-    //   .catch((err) => {
-    //     if (err === 404) {
-    //       serverErrorMessage('Пользователь по указанному id не найден.')
-    //       return
-    //     }
-    //     if (err === 400) {
-    //       serverErrorMessage('данные не корректны')
-    //       return
-    //     }
-    //     serverErrorMessage('На сервере произошла ошибка')
-    //     return
-    //   })
-  }, []);
-
- 
-  useEffect(() => {
-    if(location.pathname !== '/saved-movies') {
-      setSearchMainMovieData([]);
-
-      // setHideBtn(true);
-      // setNothingFound(false);
-    }
-  }, [location.pathname]);
+      })
+  }, [locationPath, history])
 
   useEffect(() => {
-    if(location.pathname === '/saved-movies') {
-      
-      setRenderStartMovie(true);
-
-      // setHideBtn(true);
-      // setNothingFound(false);
+    if (location.pathname !== '/saved-movies') {
+      setSearchMainMovieData([])
     }
-  }, [location.pathname]);
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (location.pathname === '/saved-movies') {
+      setRenderStartMovie(true)
+    }
+  }, [location.pathname])
   /**
    * вывод контента исходя из ширины экрана
    */
@@ -178,24 +176,6 @@ function App() {
     }
   }, [searchMovieData])
 
-  // useEffect(() => {
-    // if (JSON.parse(localStorage.getItem('saved-films')) === null) {
-    //   return;
-    // }
-    // if (searchMainMovieData.length === 0) {
-    //   if (JSON.parse(localStorage.getItem('saved-films')).length > 0) {
-    //     setNothingFoundSavedMovies(false)
-    //     return
-    //   }
-    //   setNothingFoundSavedMovies(true);
-    // }
-    // if (searchMainMovieData.length !== 0) {
-    //   setNothingFoundSavedMovies(false);
-    //   return;
-    // }
-    // setNothingFoundSavedMovies(true);
-  // }, [searchMainMovieData])
-
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user')) || ''
     if (userData === '') {
@@ -231,18 +211,18 @@ function App() {
               )
             })
           )
-          setRenderStartMovie(false);
-          return;
+          setRenderStartMovie(false)
+          return
         }
         setSearchMainMovieData(
           mainMovieData.filter((film) =>
             film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
           )
         )
-        setHideBtn(false);
-        setRenderStartMovie(false);
-        
-        return;
+        setHideBtn(false)
+        setRenderStartMovie(false)
+
+        return
       }
       if (checked) {
         setSearchMovieData(
@@ -274,6 +254,7 @@ function App() {
         )
       )
       setHideBtn(false)
+
       localStorage.setItem(
         'films',
         JSON.stringify(
@@ -340,9 +321,10 @@ function App() {
         setServerErrMessge('')
         getUserData()
         setLoggedIn(true)
-        getAllMainMovie();
-        // setSearchMovieData([])
-        // setSearchMainMovieData([])
+        getAllMainMovie()
+        setSearchMovieData([])
+        setSearchMainMovieData([])
+
         history.push('/movies')
       })
       .catch((err) => {
@@ -364,10 +346,10 @@ function App() {
   function exitApp() {
     apiMoviesMain.logout().then((res) => {
       setLoggedIn(false)
-      setSearchMovieData([]);
-      setSearchMainMovieData([]);
-      localStorage.clear();
-      history.push('/');
+      setSearchMovieData([])
+      setSearchMainMovieData([])
+      localStorage.clear()
+      history.push('/')
     })
   }
   /**
@@ -379,6 +361,7 @@ function App() {
       .then((res) => {
         setServerErrMessge('')
         setCurrentUser({ ...res })
+        localStorage.setItem('authKey', JSON.stringify(true))
         localStorage.setItem('user', JSON.stringify({ ...res }))
       })
       .catch((err) => {
@@ -400,15 +383,16 @@ function App() {
    */
 
   function handlerChangeCurrentUser(data, currentUser) {
-    setCurrentUser({_id:currentUser._id, ...data});
-    console.log({...data});
+    setCurrentUser({ _id: currentUser._id, ...data })
   }
   function handlerChangeUser(data) {
     apiMoviesMain
       .changeUser(data)
       .then((res) => {
-        setServerErrMessge(`Обнавленные данные: username: ${res.name}, email: ${res.email}`);
-        localStorage.setItem('user', JSON.stringify({ ...res }));
+        setServerErrMessge(
+          `Обнавленные данные: username: ${res.name}, email: ${res.email}`
+        )
+        localStorage.setItem('user', JSON.stringify({ ...res }))
       })
       .catch((err) => {
         if (err === 409) {
@@ -541,10 +525,27 @@ function App() {
         setServerErrMessge,
         login,
         createUser,
-        handlerChangeCurrentUser
+        handlerChangeCurrentUser,
       }}
     >
       <Switch>
+        <Route exact path='/signin'>
+          <Login />
+        </Route>
+        <Route exact path='/signup'>
+          <Register />
+        </Route>
+        <ProtectedRoute
+          path='/profile'
+          loggedIn={loggedIn}
+          component={Profile}
+        />
+        <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} />
+        <ProtectedRoute
+          path='/saved-movies'
+          loggedIn={loggedIn}
+          component={SavedMovies}
+        />
         <Route exact path='/'>
           <Header>
             {loggedIn ? <MainMenuAuthorized /> : <MainMenuUnauthorized />}
@@ -562,24 +563,6 @@ function App() {
             </Toltip>
           </ToltioPopup>
         </Route>
-        <Route path='/signin'>
-          <Login />
-        </Route>
-        <Route path='/signup'>
-          <Register />
-        </Route>
-        <ProtectedRoute
-          path='/profile'
-          loggedIn={loggedIn}
-          component={Profile}
-        />
-        <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} />
-        <ProtectedRoute
-          path='/saved-movies'
-          loggedIn={loggedIn}
-          component={SavedMovies}
-        />
-
         <Route path='*'>
           <NotFound404 />
         </Route>

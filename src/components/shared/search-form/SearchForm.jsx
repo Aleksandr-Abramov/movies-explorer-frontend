@@ -3,7 +3,6 @@ import { useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import './searchForm.css'
 import { GlobalContext } from '../../context/Context'
-import { useEffect } from 'react'
 
 export default function SearchForm() {
   const { handlerOnSubmit } = useContext(GlobalContext)
@@ -14,7 +13,6 @@ export default function SearchForm() {
   )
   const location = useLocation()
 
-  
   let searchInput
   if (location.pathname === '/movies') {
     if (localStorage.getItem('request') === null) {
@@ -22,15 +20,7 @@ export default function SearchForm() {
     } else {
       searchInput = localStorage.getItem('request').slice(1, -1)
     }
-  } 
-  
-  //  else if (location.pathname === '/saved-movies') {
-  //   if (localStorage.getItem('saved-films-request') === null) {
-  //     searchInput = ''
-  //   } else {
-  //     searchInput = localStorage.getItem('saved-films-request').slice(1, -1)
-  //   }
-  // }
+  }
 
   const [inputValue, setInputValue] = useState(searchInput)
   const [checkboxСlass, setСheckboxСlass] = useState(

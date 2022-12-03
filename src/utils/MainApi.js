@@ -60,7 +60,6 @@ class ApiMoviesMain {
     }).then((res) => this.dataValidation(res));
   }
   changeUser({ name, email }) {
-    console.log();
     return fetch(`${this._url}/users/me`, {
       credentials: 'include',
       method: 'PATCH',
@@ -125,6 +124,15 @@ class ApiMoviesMain {
   //получить все фильмы
   getAllMovies() {
     return fetch(`${this._url}/movies`, {
+      credentials: 'include',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    }).then((res) => this.dataValidation(res));
+  }
+  getCookies() {
+    return fetch(`${this._url}/getcookies`, {
       credentials: 'include',
       method: 'GET',
       headers: {

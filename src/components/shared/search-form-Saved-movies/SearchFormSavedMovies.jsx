@@ -3,14 +3,12 @@ import { useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import './searchFormSavedMovies.css'
 import { GlobalContext } from '../../context/Context'
-import { useEffect } from 'react'
 
 export default function SearchFormSavedMovies() {
   const { handlerOnSubmit } = useContext(GlobalContext)
   const [checked, setChecked] = useState(false)
   const location = useLocation()
 
-  
   const [inputValue, setInputValue] = useState('')
   const [checkboxСlass, setСheckboxСlass] = useState(
     checked ? 'search-form__circle_move' : ''
