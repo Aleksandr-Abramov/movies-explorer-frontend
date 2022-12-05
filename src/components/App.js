@@ -27,8 +27,9 @@ function App() {
   const [openCloseToltipPopup, setOpenCloseToltipPopup] = useState(false)
   const [movieData, setMovieData] = useState([])
   const [renderStartMovie, setRenderStartMovie] = useState(false)
-  const [searchMovieData, setSearchMovieData] = useState([])
+  
   const [mainMovieData, setMainMovieData] = useState([])
+  const [searchMovieData, setSearchMovieData] = useState([])
   const [searchMainMovieData, setSearchMainMovieData] = useState([])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const [nothingFound, setNothingFound] = useState(false)
@@ -69,45 +70,38 @@ function App() {
    */
   useEffect(() => {
     apiMovies
-    .getAllMovies()
-    .then((arr) => {
-      setMovieData(arr)
-    })
-    .catch((err) => {
-      handlerOpenToltipPopup()
-    })
-    if (localStorage.getItem('authKey') !== 'true') {
-      return
-    }
+      .getAllMovies()
+      .then((arr) => {
+        setMovieData(arr)
+      })
+      .catch((err) => {
+        handlerOpenToltipPopup()
+      })
     apiMoviesMain
-      .getUserData()
+      .getCookies(localStorage.getItem('cookie'))
       .then((res) => {
-        if (res.id) {
+        if (res.access === true) {
           setLoggedIn(true)
-          setCurrentUser(res)
           setRenderStartMovie(true)
-          setSearchMovieData([])
-          setSearchMainMovieData([])
-          localStorage.removeItem('films')
+          getUserData()
           getAllMainMovie()
           history.push(locationPath)
         }
-        return
+        if (res.access === false) {
+          TokenFalseExitApp()
+        }
       })
       .catch((err) => {
-        if (err === 401) {
-          setLoggedIn(false)
-          setCurrentUser({})
-          history.push('/')
-          return
-        }
-        return
+        TokenFalseExitApp()
       })
-  }, [locationPath, history])
+  }, [])
 
   useEffect(() => {
     if (location.pathname !== '/saved-movies') {
       setSearchMainMovieData([])
+    }
+    if (location.pathname === '/signin' || location.pathname === '/signup' ) {
+      serverErrorMessage('')
     }
   }, [location.pathname])
 
@@ -201,6 +195,8 @@ function App() {
           : 12
       )
 
+      const mainMovieDataIDs = mainMovieData.map((film) => film.movieId)
+      // console.log(mainMovieDataIDs)
       if (location.pathname === '/saved-movies') {
         if (checked) {
           setSearchMainMovieData(
@@ -225,42 +221,72 @@ function App() {
         return
       }
       if (checked) {
+        const movieSearchDataChecked = movieData.filter((film) => {
+          return (
+            film.duration < 40 &&
+            film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
+          )
+        })
         setSearchMovieData(
-          movieData.filter((film) => {
-            return (
-              film.duration < 40 &&
-              film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
-            )
-          })
+          movieSearchDataChecked
+          // movieSearchDataChecked.map((film)=> {
+          //   if(mainMovieDataIDs.includes(film.id)) {
+          //     film['isSaved'] = true
+          //   } else {
+          //     film['isSaved'] = false
+          //   }
+          //   return film;
+          // })
         )
         localStorage.setItem(
           'films',
           JSON.stringify(
-            movieData.filter((film) => {
-              return (
-                film.duration < 40 &&
-                film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
-              )
-            })
+            movieSearchDataChecked
+            // movieSearchDataChecked.map((film)=> {
+            //   if(mainMovieDataIDs.includes(film.id)) {
+            //     film['isSaved'] = true
+            //   } else {
+            //     film['isSaved'] = false
+            //   }
+            //   return film;
+            // })
           )
         )
         localStorage.setItem('request', JSON.stringify(inputValueData))
         return
       }
+      const movieSearchData = movieData.filter((film) => {
+        return film.nameRU
+          .toUpperCase()
+          .includes(inputValueData.toUpperCase())
+      })
 
       setSearchMovieData(
-        movieData.filter((film) =>
-          film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
-        )
+        movieSearchData
+        // movieSearchData.map((film)=> {
+        //   if(mainMovieDataIDs.includes(film.id)) {
+        //     film['isSaved'] = true
+        //   } else {
+        //     film['isSaved'] = false
+        //   }
+        //   return film;
+        // })
+        
       )
       setHideBtn(false)
 
       localStorage.setItem(
         'films',
         JSON.stringify(
-          movieData.filter((film) =>
-            film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
-          )
+          movieSearchData
+          // movieSearchData.map((film)=> {
+          //   if(mainMovieDataIDs.includes(film.id)) {
+          //     film['isSaved'] = true
+          //   } else {
+          //     film['isSaved'] = false
+          //   }
+          //   return film;
+          // })
         )
       )
       localStorage.setItem('request', JSON.stringify(inputValueData))
@@ -282,6 +308,7 @@ function App() {
       setLastSlice(lastSlice + 1)
     }
     if (searchMovieData.length <= lastSlice) {
+      console.log(searchMovieData.length, lastSlice);
       setLastSlice(searchMovieData.length)
       setHideBtn(true)
     }
@@ -324,8 +351,8 @@ function App() {
         getAllMainMovie()
         setSearchMovieData([])
         setSearchMainMovieData([])
-
         history.push('/movies')
+        localStorage.setItem('cookie', res.cookie)
       })
       .catch((err) => {
         if (err === 401) {
@@ -352,6 +379,14 @@ function App() {
       history.push('/')
     })
   }
+  function TokenFalseExitApp() {
+    apiMoviesMain.logout().then((res) => {
+      setLoggedIn(false)
+      setSearchMovieData([])
+      setSearchMainMovieData([])
+      localStorage.clear()
+    })
+  }
   /**
    * получение данных пользователя.
    */
@@ -361,7 +396,6 @@ function App() {
       .then((res) => {
         setServerErrMessge('')
         setCurrentUser({ ...res })
-        localStorage.setItem('authKey', JSON.stringify(true))
         localStorage.setItem('user', JSON.stringify({ ...res }))
       })
       .catch((err) => {
@@ -526,6 +560,7 @@ function App() {
         login,
         createUser,
         handlerChangeCurrentUser,
+        setSearchMovieData,
       }}
     >
       <Switch>

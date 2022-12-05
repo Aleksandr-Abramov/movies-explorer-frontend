@@ -131,13 +131,16 @@ class ApiMoviesMain {
       },
     }).then((res) => this.dataValidation(res));
   }
-  getCookies() {
+  getCookies(cookies) {
     return fetch(`${this._url}/getcookies`, {
       credentials: 'include',
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
+      body: JSON.stringify({
+        token: cookies,
+      }),
     }).then((res) => this.dataValidation(res));
   }
 }

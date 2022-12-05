@@ -8,12 +8,14 @@ import { useLocation } from 'react-router-dom'
 
 export default function MoviesCardList() {
   const {
+    //movieData,
     mainMovieData,
     searchMovieData,
     hendlerMoreContent,
     hideBtn,
     lastSlice,
     nothingFound,
+    // setSearchMovieData,
   } = useContext(GlobalContext)
   const location = useLocation()
   //BeatfilmMoviesApi
@@ -42,7 +44,6 @@ export default function MoviesCardList() {
             />
           )
         })
-
   return (
     <>
       <section className='movies-card-list'>{searchRender}</section>
@@ -52,12 +53,13 @@ export default function MoviesCardList() {
         </div>
       )}
 
-      {searchMovieData.length !== 0 && searchMovieData.length !== lastSlice && (
-        <MoreContent
-          hendlerMoreContent={hendlerMoreContent}
-          hideBtn={hideBtn}
-        />
-      )}
+      {searchMovieData.length !== lastSlice &&
+        searchMovieData.length >= lastSlice && (
+          <MoreContent
+            hendlerMoreContent={hendlerMoreContent}
+            hideBtn={hideBtn}
+          />
+        )}
     </>
   )
 }
