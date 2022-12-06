@@ -1,17 +1,17 @@
-import { APIMAINURL } from './constants';
+import { APIMAINURL } from './constants'
 
 // console.log(APIMAINURL);
 
 class ApiMoviesMain {
   constructor(apiPathUrl) {
-    this._url = apiPathUrl.url;
+    this._url = apiPathUrl.url
   }
 
   dataValidation(res) {
     if (res.ok) {
-      return res.json();
+      return res.json()
     }
-    return Promise.reject(res.status);
+    return Promise.reject(res.status)
   }
   /**
    * создать нового пользователя.
@@ -28,7 +28,7 @@ class ApiMoviesMain {
         email: email,
         password: password,
       }),
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
 
   /**
@@ -47,7 +47,7 @@ class ApiMoviesMain {
         email: email,
         password: password,
       }),
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
   //получить данные пользователя
   getUserData() {
@@ -57,7 +57,7 @@ class ApiMoviesMain {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
   changeUser({ name, email }) {
     return fetch(`${this._url}/users/me`, {
@@ -72,9 +72,9 @@ class ApiMoviesMain {
         name: name,
         email: email,
       }),
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
-  //выход 
+  //выход
   logout() {
     return fetch(`${this._url}/signout`, {
       credentials: 'include',
@@ -82,10 +82,10 @@ class ApiMoviesMain {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
 
-  //создать фильм 
+  //создать фильм
   createMovie(data) {
     return fetch(`${this._url}/movies`, {
       credentials: 'include',
@@ -96,19 +96,19 @@ class ApiMoviesMain {
         // secure: false,
       },
       body: JSON.stringify({
-        "country": data.country,
-        "director": data.director,
-        "duration": data.duration,
-        "year": data.year,
-        "description": data.description,
-        "image": `https://api.nomoreparties.co/${data.image.url}`,
-        "trailer": data.trailerLink,
-        "nameRU": data.nameRU,
-        "nameEN": data.nameEN,
-        "thumbnail": "https://picsum.photos/200/300.jpg",
-        "movieId": data.id
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: `https://api.nomoreparties.co/${data.image.url}`,
+        trailer: data.trailerLink,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+        thumbnail: 'https://picsum.photos/200/300.jpg',
+        movieId: data.id,
       }),
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
   //удаление фильма
   deleteMovie(idMovie) {
@@ -118,7 +118,7 @@ class ApiMoviesMain {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
 
   //получить все фильмы
@@ -129,7 +129,7 @@ class ApiMoviesMain {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
   getCookies(cookies) {
     return fetch(`${this._url}/getcookies`, {
@@ -141,10 +141,10 @@ class ApiMoviesMain {
       body: JSON.stringify({
         token: cookies,
       }),
-    }).then((res) => this.dataValidation(res));
+    }).then((res) => this.dataValidation(res))
   }
 }
 
-const apiMoviesMain = new ApiMoviesMain(APIMAINURL);
+const apiMoviesMain = new ApiMoviesMain(APIMAINURL)
 
-export default apiMoviesMain;
+export default apiMoviesMain

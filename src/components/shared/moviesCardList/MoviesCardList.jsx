@@ -8,14 +8,12 @@ import { useLocation } from 'react-router-dom'
 
 export default function MoviesCardList() {
   const {
-    //movieData,
     mainMovieData,
     searchMovieData,
     hendlerMoreContent,
     hideBtn,
     lastSlice,
     nothingFound,
-    // setSearchMovieData,
   } = useContext(GlobalContext)
   const location = useLocation()
   //BeatfilmMoviesApi

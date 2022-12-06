@@ -6,15 +6,14 @@ import { GlobalContext } from '../../context/Context'
 export default function MoviesCard(props) {
   const { hendlerSaveMovies, hendlerDeleteMovies } = useContext(GlobalContext)
   const [isSaved, setIsSaved] = useState(props.isSaved)
-  const saveDelBtnClass = isSaved ? '' : 'movie-card__btn-ok_unactive'
-  // console.log(isSaved);
+  const saveDelBtnClass = props.isSaved ? '' : 'movie-card__btn-ok_unactive'
+
   function hendlerClickLikeBtn() {
+    setIsSaved(() => !isSaved)
     if (isSaved) {
-      setIsSaved(false)
       hendlerDeleteMovies(props)
     } else {
       hendlerSaveMovies(props)
-      setIsSaved(true)
     }
   }
 
@@ -36,9 +35,7 @@ export default function MoviesCard(props) {
         ></button>
       </div>
       <div className='movie-card__text-container'>
-        <h4 className='movie-card__name'>
-          {props.nameRU}
-        </h4>
+        <h4 className='movie-card__name'>{props.nameRU}</h4>
         <span className='movie-card__time'>{props.duration}</span>
       </div>
     </div>

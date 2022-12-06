@@ -21,13 +21,19 @@ import apiMovies from '../utils/MoviesApi'
 import apiMoviesMain from '../utils/MainApi'
 import Toltip from './shared/toltip/Toltip'
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
+import {
+  PHONE_WIDTH,
+  TABLET_WIDTH,
+  COMPUTER_WIDTH,
+  SHORT_MOVIE_DURATION,
+} from '../utils/constants'
 
 function App() {
   const [openClosePopup, setOpenClosePopup] = useState(false)
   const [openCloseToltipPopup, setOpenCloseToltipPopup] = useState(false)
   const [movieData, setMovieData] = useState([])
   const [renderStartMovie, setRenderStartMovie] = useState(false)
-  
+
   const [mainMovieData, setMainMovieData] = useState([])
   const [searchMovieData, setSearchMovieData] = useState([])
   const [searchMainMovieData, setSearchMainMovieData] = useState([])
@@ -40,9 +46,9 @@ function App() {
   const [serverErrMessge, setServerErrMessge] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
   const [lastSlice, setLastSlice] = useState(
-    windowWidth >= 320 && windowWidth <= 425
+    windowWidth >= PHONE_WIDTH && windowWidth <= TABLET_WIDTH
       ? 5
-      : windowWidth >= 426 && windowWidth <= 768
+      : windowWidth >= TABLET_WIDTH + 1 && windowWidth <= COMPUTER_WIDTH
       ? 8
       : 12
   )
@@ -100,7 +106,7 @@ function App() {
     if (location.pathname !== '/saved-movies') {
       setSearchMainMovieData([])
     }
-    if (location.pathname === '/signin' || location.pathname === '/signup' ) {
+    if (location.pathname === '/signin' || location.pathname === '/signup') {
       serverErrorMessage('')
     }
   }, [location.pathname])
@@ -113,11 +119,12 @@ function App() {
   /**
    * вывод контента исходя из ширины экрана
    */
+
   useEffect(() => {
     setLastSlice(
-      windowWidth >= 320 && windowWidth <= 425
+      windowWidth >= PHONE_WIDTH && windowWidth <= TABLET_WIDTH
         ? 5
-        : windowWidth >= 426 && windowWidth <= 768
+        : windowWidth >= TABLET_WIDTH + 1 && windowWidth <= COMPUTER_WIDTH
         ? 8
         : 12
     )
@@ -188,107 +195,53 @@ function App() {
     setTimeout(() => {
       setPreloaderCondition(true)
       setLastSlice(
-        windowWidth >= 320 && windowWidth <= 425
+        windowWidth >= PHONE_WIDTH && windowWidth <= TABLET_WIDTH
           ? 5
-          : windowWidth >= 426 && windowWidth <= 768
+          : windowWidth >= TABLET_WIDTH + 1 && windowWidth <= COMPUTER_WIDTH
           ? 8
           : 12
       )
 
-      const mainMovieDataIDs = mainMovieData.map((film) => film.movieId)
-      // console.log(mainMovieDataIDs)
       if (location.pathname === '/saved-movies') {
         if (checked) {
-          setSearchMainMovieData(
-            mainMovieData.filter((film) => {
-              return (
-                film.duration < 40 &&
-                film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
-              )
-            })
-          )
+          const mainMoviesSearchDataChecked = mainMovieData.filter((film) => {
+            return (
+              film.duration < SHORT_MOVIE_DURATION &&
+              film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
+            )
+          })
+          setSearchMainMovieData(mainMoviesSearchDataChecked)
           setRenderStartMovie(false)
           return
         }
-        setSearchMainMovieData(
-          mainMovieData.filter((film) =>
-            film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
-          )
+        const mainMoviesSearchData = mainMovieData.filter((film) =>
+          film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
         )
+        setSearchMainMovieData(mainMoviesSearchData)
         setHideBtn(false)
         setRenderStartMovie(false)
-
         return
       }
       if (checked) {
-        const movieSearchDataChecked = movieData.filter((film) => {
+        const moviesSearchDataChecked = movieData.filter((film) => {
           return (
-            film.duration < 40 &&
+            film.duration < SHORT_MOVIE_DURATION &&
             film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
           )
         })
-        setSearchMovieData(
-          movieSearchDataChecked
-          // movieSearchDataChecked.map((film)=> {
-          //   if(mainMovieDataIDs.includes(film.id)) {
-          //     film['isSaved'] = true
-          //   } else {
-          //     film['isSaved'] = false
-          //   }
-          //   return film;
-          // })
-        )
-        localStorage.setItem(
-          'films',
-          JSON.stringify(
-            movieSearchDataChecked
-            // movieSearchDataChecked.map((film)=> {
-            //   if(mainMovieDataIDs.includes(film.id)) {
-            //     film['isSaved'] = true
-            //   } else {
-            //     film['isSaved'] = false
-            //   }
-            //   return film;
-            // })
-          )
-        )
+        setSearchMovieData(moviesSearchDataChecked)
+        localStorage.setItem('films', JSON.stringify(moviesSearchDataChecked))
         localStorage.setItem('request', JSON.stringify(inputValueData))
         return
       }
-      const movieSearchData = movieData.filter((film) => {
-        return film.nameRU
-          .toUpperCase()
-          .includes(inputValueData.toUpperCase())
+      const moviesSearchData = movieData.filter((film) => {
+        return film.nameRU.toUpperCase().includes(inputValueData.toUpperCase())
       })
 
-      setSearchMovieData(
-        movieSearchData
-        // movieSearchData.map((film)=> {
-        //   if(mainMovieDataIDs.includes(film.id)) {
-        //     film['isSaved'] = true
-        //   } else {
-        //     film['isSaved'] = false
-        //   }
-        //   return film;
-        // })
-        
-      )
+      setSearchMovieData(moviesSearchData)
       setHideBtn(false)
 
-      localStorage.setItem(
-        'films',
-        JSON.stringify(
-          movieSearchData
-          // movieSearchData.map((film)=> {
-          //   if(mainMovieDataIDs.includes(film.id)) {
-          //     film['isSaved'] = true
-          //   } else {
-          //     film['isSaved'] = false
-          //   }
-          //   return film;
-          // })
-        )
-      )
+      localStorage.setItem('films', JSON.stringify(moviesSearchData))
       localStorage.setItem('request', JSON.stringify(inputValueData))
     }, 1000)
     setPreloaderCondition(false)
@@ -297,18 +250,19 @@ function App() {
    * вывод добавочного контента, при нажатии на кнопку "ЕЩЕ".
    * Если данные закончились, спрятать кнопку.
    */
+
   function hendlerMoreContent() {
-    if (windowWidth >= 769) {
+    if (windowWidth >= COMPUTER_WIDTH + 1) {
       setLastSlice(lastSlice + 3)
     }
-    if (windowWidth >= 426 && windowWidth <= 768) {
+    if (windowWidth >= TABLET_WIDTH + 1 && windowWidth <= COMPUTER_WIDTH) {
       setLastSlice(lastSlice + 2)
     }
-    if (windowWidth >= 320 && windowWidth <= 425) {
+    if (windowWidth >= PHONE_WIDTH && windowWidth <= TABLET_WIDTH) {
       setLastSlice(lastSlice + 1)
     }
     if (searchMovieData.length <= lastSlice) {
-      console.log(searchMovieData.length, lastSlice);
+      console.log(searchMovieData.length, lastSlice)
       setLastSlice(searchMovieData.length)
       setHideBtn(true)
     }
