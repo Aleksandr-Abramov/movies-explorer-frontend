@@ -2,8 +2,8 @@ export const BEATIFULMOVIESURL = {
   url: 'https://api.nomoreparties.co/beatfilm-movies',
 };
 export const APIMAINURL = {
- url: 'http://localhost:3000',
-  // url: 'https://api.movies-alex.nomoredomains.icu',
+   // url: 'http://localhost:3000',
+   url: 'https://api.movies-alex.nomoredomains.icu',
 };
 
 export const PHONE_WIDTH = 320
