@@ -5,12 +5,18 @@ import Popup from '../../shared/popup/Popup'
 import Menu from '../../menu/Menu'
 import MainMenuAuthorized from '../../shared/main-menu-authorized/MainMenuAuthorized'
 import { useContext } from 'react'
-import { GlobalContext, UsersContext } from '../../context/Context'
+import { GlobalContext } from '../../context/Context'
 import { useForm } from 'react-hook-form'
 
 export default function Profile() {
-  const { currentUser } = useContext(GlobalContext)
-  const { handlerChangeUser, serverErrMessge, exitApp } = useContext(UsersContext)
+  const {
+    handlerChangeUser,
+    serverErrMessge,
+    exitApp,
+    setServerErrMessge,
+    currentUser,
+    handlerChangeCurrentUser,
+  } = useContext(GlobalContext)
 
   const {
     register,
@@ -22,11 +28,22 @@ export default function Profile() {
   })
 
   function handlerOnSubmit(data) {
-    handlerChangeUser(data);
-    reset();
+    if (currentUser.name === data.name && currentUser.email === data.email) {
+      setServerErrMessge(
+        'name и email полностью совтодают c предыдущими. Необходимо, что бы один из параметров отличался.'
+      )
+      return
+    }
+    handlerChangeUser(data)
+    reset()
+    handlerChangeCurrentUser(data, currentUser)
   }
   function logout() {
-    exitApp();
+    exitApp()
+  }
+
+  function handlerOnFocusInput() {
+    setServerErrMessge('')
   }
   return (
     <>
@@ -54,7 +71,9 @@ export default function Profile() {
               className='profile-form__input'
               id='name'
               name='name'
-              placeholder={currentUser.name && currentUser.name}
+              defaultValue={currentUser.name}
+              placeholder='Введите имя'
+              onFocus={handlerOnFocusInput}
               {...register('name', {
                 required: {
                   value: true,
@@ -70,7 +89,8 @@ export default function Profile() {
                 },
                 pattern: {
                   value: /[A-Za-zА-Яа-яЁё\\s-]+/,
-                  message: 'поле name содержит только латиницу, кириллицу, пробел или дефис',
+                  message:
+                    'поле name содержит только латиницу, кириллицу, пробел или дефис',
                 },
               })}
             />
@@ -87,7 +107,9 @@ export default function Profile() {
               className='profile-form__input'
               id='email'
               name='email'
-              placeholder={currentUser.name && currentUser.email}
+              defaultValue={currentUser.email}
+              placeholder='Введите email'
+              onFocus={handlerOnFocusInput}
               {...register('email', {
                 required: {
                   value: true,
@@ -104,7 +126,11 @@ export default function Profile() {
             {errors.email && errors.email.message}
           </p>
           <p className='server-error-message'>{serverErrMessge}</p>
-          <button type='submit' className='profile-form-btn' disabled={!isValid}>
+          <button
+            type='submit'
+            className='profile-form-btn'
+            disabled={!isValid}
+          >
             Редактировать
           </button>
         </form>
